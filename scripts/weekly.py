@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 
 from common import CONFIG, DATA, agora, garda_arbore, hoxe, le_arbores
@@ -48,7 +49,10 @@ def main() -> int:
         informe["erros"].append("máis da metade das fontes fallaron: esta semana non se publican fichas novas")
 
     # 2. Xerar textos (con tope semanal)
-    if not args.sen_claude and not fontes_caidas:
+    sen_clave = not os.environ.get("ANTHROPIC_API_KEY")
+    if sen_clave and not args.sen_claude:
+        informe["erros"].append("falta o segredo ANTHROPIC_API_KEY: esta semana non se redactan textos")
+    if not args.sen_claude and not sen_clave and not fontes_caidas:
         import anthropic
         from generate import datos_para_claude, redacta_e_verifica
         cliente = anthropic.Anthropic()
