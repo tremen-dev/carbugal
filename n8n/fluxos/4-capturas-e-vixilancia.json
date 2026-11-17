@@ -1,0 +1,199 @@
+{
+  "name": "carbugal · 4 Capturas no Wayback e vixilancia",
+  "nodes": [
+    {
+      "id": "15ded234-5e49-534d-a638-79fa922f401a",
+      "name": "Día 1 de cada mes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 1,
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "d90a84f4-2622-5855-be9a-82fe973fa26d",
+      "name": "Páxinas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        200
+      ],
+      "parameters": {
+        "jsCode": "return ['/', '/carballos/', '/mapa/', '/como-se-fai/'].map(p => ({ json: { url: 'https://web.archive.org/save/https://carbugal.com' + p } }));"
+      }
+    },
+    {
+      "id": "3ed97b7e-5896-5ec2-9734-354a4be32621",
+      "name": "Gardar no Wayback",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        200
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.url }}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 20000
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "c2b1485e-c1ce-5804-a5ce-edef7d635168",
+      "name": "Cada hora",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        450
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "32e4b518-d42d-5e4e-9b79-90e1ab3adc6b",
+      "name": "Comprobar web",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        450
+      ],
+      "parameters": {
+        "method": "HEAD",
+        "url": "https://carbugal.com/",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "ec58d064-70aa-578f-b147-b80b1981a3da",
+      "name": "3 fallos seguidos?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        450
+      ],
+      "parameters": {
+        "jsCode": "const st = $getWorkflowStaticData('global');\nconst ok = !$input.first().json.error;\nst.caidas = ok ? 0 : (st.caidas || 0) + 1;\nreturn st.caidas === 3 ? [{ json: { aviso: true } }] : [];"
+      }
+    },
+    {
+      "id": "a11a6953-3bbe-5439-a1e7-ea30d0157829",
+      "name": "Avisar caída",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        450
+      ],
+      "parameters": {
+        "fromEmail": "[REMITENTE]",
+        "toEmail": "[O TEU CORREO]",
+        "subject": "carbugal.com non responde",
+        "emailFormat": "text",
+        "text": "carbugal.com leva tres comprobacións seguidas sen responder (unha por hora).",
+        "options": {}
+      },
+      "credentials": {
+        "smtp": {
+          "id": "",
+          "name": "SMTP avisos"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Día 1 de cada mes": {
+      "main": [
+        [
+          {
+            "node": "Páxinas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Páxinas": {
+      "main": [
+        [
+          {
+            "node": "Gardar no Wayback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cada hora": {
+      "main": [
+        [
+          {
+            "node": "Comprobar web",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comprobar web": {
+      "main": [
+        [
+          {
+            "node": "3 fallos seguidos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3 fallos seguidos?": {
+      "main": [
+        [
+          {
+            "node": "Avisar caída",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid"
+  }
+}

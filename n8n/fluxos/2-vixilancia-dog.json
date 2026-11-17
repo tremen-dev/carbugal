@@ -1,0 +1,217 @@
+{
+  "name": "carbugal · 2 Vixilancia do catálogo da Xunta",
+  "nodes": [
+    {
+      "id": "17f071d9-a567-5bca-a776-dcbba66bec08",
+      "name": "Cada día 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "906ee67e-2552-5abe-b6d1-e918d39322db",
+      "name": "Páxina do catálogo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://medioambiente.xunta.gal/seccion-organizacion/c/CMAOT_DX_Conservacion_Natureza?content=Direccion_Xeral_Conservacion_Natureza%2FBiodiversidade%2Fseccion.html&sub=Arbores_senlleiras%2F",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "3a48773a-a58d-5d34-b4d9-aa75991a0b74",
+      "name": "Ligazóns novas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const CATALOGO_URL = \"https://medioambiente.xunta.gal/seccion-organizacion/c/CMAOT_DX_Conservacion_Natureza?content=Direccion_Xeral_Conservacion_Natureza%2FBiodiversidade%2Fseccion.html&sub=Arbores_senlleiras%2F\";\nconst html = String($input.first().json.data || '');\nconst ligazons = [...new Set(html.match(/https?:\\/\\/www\\.xunta\\.gal\\/dog\\/Publicados\\/[^\"'\\s<>]+?\\.html/g) || [])];\nconst st = $getWorkflowStaticData('global');\nconst vistas = new Set(st.vistas || []);\nconst primeira = !st.vistas;\nconst novas = ligazons.filter(u => !vistas.has(u));\nst.vistas = ligazons.length ? ligazons : (st.vistas || []);\nif (ligazons.length === 0) return [{ json: { aviso: true, asunto: 'A páxina do catálogo da Xunta cambiou', texto: 'Non atopei ningunha ligazón ao DOG. Revisa a páxina: ' + CATALOGO_URL } }];\nif (primeira || novas.length === 0) return [];\nreturn [{ json: { aviso: true, dispatch: true, asunto: `Novas resolucións no catálogo de árbores senlleiras (${novas.length})`,\n  texto: 'Hai que engadir os Quercus novos a data/seed/catalogo-xunta.csv (ou quitar os descatalogados):\\n\\n' + novas.join('\\n') } }];"
+      }
+    },
+    {
+      "id": "7a71d30b-fe91-566c-80f1-5a1a311ba2b0",
+      "name": "Avisar",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        300
+      ],
+      "parameters": {
+        "fromEmail": "[REMITENTE]",
+        "toEmail": "[O TEU CORREO]",
+        "subject": "={{ $json.asunto }}",
+        "emailFormat": "text",
+        "text": "={{ $json.texto }}",
+        "options": {}
+      },
+      "credentials": {
+        "smtp": {
+          "id": "",
+          "name": "SMTP avisos"
+        }
+      }
+    },
+    {
+      "id": "a4f73c1e-11b9-52b4-98e7-0a0d705a43a6",
+      "name": "Lanzar ciclo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        880,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "48f39a76-bc8b-5683-9604-db45d512374e",
+              "leftValue": "={{ $('Ligazóns novas').item.json.dispatch === true }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "7458e270-af3e-506b-8e76-6aae3fc9a31d",
+      "name": "Dispatch dog-novidade",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        220
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/tremen-dev/carbugal/dispatches",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ event_type: \"dog-novidade\" }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "GitHub carbugal"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Cada día 08:00": {
+      "main": [
+        [
+          {
+            "node": "Páxina do catálogo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Páxina do catálogo": {
+      "main": [
+        [
+          {
+            "node": "Ligazóns novas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ligazóns novas": {
+      "main": [
+        [
+          {
+            "node": "Avisar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Avisar": {
+      "main": [
+        [
+          {
+            "node": "Lanzar ciclo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lanzar ciclo?": {
+      "main": [
+        [
+          {
+            "node": "Dispatch dog-novidade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid"
+  }
+}

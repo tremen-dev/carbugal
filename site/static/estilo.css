@@ -53,3 +53,4 @@ form .caixa input{width:auto;margin-top:6px}
   .meta,.lema,figcaption,table.ficha th,.marca .sub{color:#CDBBA8}
   .aviso{background:#2F2A20}
 }
+.trampa { position: absolute; left: -9999px; }

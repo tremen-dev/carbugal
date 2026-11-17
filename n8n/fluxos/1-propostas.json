@@ -1,0 +1,294 @@
+{
+  "name": "carbugal · 1 Propostas da web",
+  "nodes": [
+    {
+      "id": "1d6d8430-8bde-5294-9298-4ab895568c61",
+      "name": "Formulario",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "carbugal-proposta",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "f4ca1a43-4b85-5e0a-a4a8-e1dbeba42637",
+      "name": "Validar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const b = $input.first().json.body || {};\nconst bin = $input.first().binary || {};\nconst lat = parseFloat(b.lat), lon = parseFloat(b.lon);\nconst ok = !!(b.nome && b.autor && bin.foto && b.licenza && !b.web)  // \"web\" é un campo trampa anti-spam\n  && lat >= 41.80 && lat <= 43.80 && lon >= -9.35 && lon <= -6.70;\nconst slug = String(b.nome || 'proposta').normalize('NFKD').replace(/[̀-ͯ]/g, '')\n  .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);\nconst ruta = `data/propostas/fotos/${new Date().toISOString().slice(0, 10)}-${slug}.jpg`;\nconst proposta = {\n  nome: String(b.nome || '').slice(0, 120), especie: String(b.especie || '').slice(0, 80),\n  concello: String(b.concello || '').slice(0, 80), lat, lon,\n  historia: String(b.historia || '').slice(0, 2000), autor: String(b.autor || '').slice(0, 120),\n  licenza: 'CC BY-SA 4.0', terreo_privado: ['1','on','si'].includes(String(b.terreo_privado)),\n  foto_url: `https://raw.githubusercontent.com/tremen-dev/carbugal/main/${ruta}`,\n};\nlet foto64 = '';\nif (ok) foto64 = (await this.helpers.getBinaryDataBuffer(0, 'foto')).toString('base64');\nreturn [{ json: { ok, ruta, foto64, proposta } }];"
+      }
+    },
+    {
+      "id": "b7cb5aa3-7bf5-5404-8a03-c33bca72b21b",
+      "name": "Válida?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "d5a8c2d7-8865-5dad-aef6-481bd75f3afc",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "7d0ee58f-bf57-5f35-9c32-75bcdc223083",
+      "name": "Subir foto",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        200
+      ],
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/tremen-dev/carbugal/contents/{{ $json.ruta }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ message: \"Foto de proposta\", branch: \"main\", content: $json.foto64 }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "GitHub carbugal"
+        }
+      }
+    },
+    {
+      "id": "46fd958f-6cab-59d1-9717-59ee880f83e7",
+      "name": "Crear issue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/tremen-dev/carbugal/issues",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ title: \"Proposta: \" + $(\"Validar\").item.json.proposta.nome, labels: [\"proposta\"], body: \"Proposta enviada desde a web.\\n\\n```json\\n\" + JSON.stringify($(\"Validar\").item.json.proposta, null, 2) + \"\\n```\" }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "GitHub carbugal"
+        }
+      }
+    },
+    {
+      "id": "9610c5f4-005f-535f-8c44-64dc134f82e0",
+      "name": "Lanzar ciclo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/tremen-dev/carbugal/dispatches",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ event_type: \"proposta\" }) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "GitHub carbugal"
+        }
+      }
+    },
+    {
+      "id": "01b3e64b-c2b4-5792-875c-aa0ed666df76",
+      "name": "Grazas",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        200
+      ],
+      "parameters": {
+        "respondWith": "redirect",
+        "redirectURL": "https://carbugal.com/propon/?grazas=1",
+        "options": {}
+      }
+    },
+    {
+      "id": "bc41585c-47b1-5afb-9ea4-e8ab88ac7c35",
+      "name": "Erro",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        420
+      ],
+      "parameters": {
+        "respondWith": "redirect",
+        "redirectURL": "https://carbugal.com/propon/?erro=1",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Formulario": {
+      "main": [
+        [
+          {
+            "node": "Validar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar": {
+      "main": [
+        [
+          {
+            "node": "Válida?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Válida?": {
+      "main": [
+        [
+          {
+            "node": "Subir foto",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Subir foto": {
+      "main": [
+        [
+          {
+            "node": "Crear issue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear issue": {
+      "main": [
+        [
+          {
+            "node": "Lanzar ciclo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lanzar ciclo": {
+      "main": [
+        [
+          {
+            "node": "Grazas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid"
+  }
+}

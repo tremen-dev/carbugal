@@ -4,6 +4,25 @@ O ciclo semanal corre en GitHub Actions. O servidor de n8n encárgase das pezas 
 estar sempre acesas. Son catro fluxos pequenos; aquí está cada un nodo a nodo para montalos
 no editor de n8n.
 
+## Importar
+
+Os catro fluxos están listos en `n8n/fluxos/`. En n8n: *Workflows › Import from File*, un por
+ficheiro. Despois de importar cada un:
+
+1. Abre os nodos de GitHub e escolle a credencial **GitHub carbugal** (tipo *Header Auth*,
+   nome `Authorization`, valor `Bearer <token>`). Créala unha vez e vale para todos.
+2. Abre os nodos de correo e escolle a credencial **SMTP avisos**; cambia `[REMITENTE]` e
+   `[O TEU CORREO]`.
+3. Activa o fluxo. Nos fluxos 1 e 3 copia a *Production URL* do webhook:
+   - fluxo 1 → `config.json` › `n8n_formulario_url`
+   - fluxo 3 → segredo `N8N_WEBHOOK_URL` do repositorio
+     (`gh secret set N8N_WEBHOOK_URL -R tremen-dev/carbugal`).
+
+O fluxo 2 vixía a páxina do catálogo na web de Medio Ambiente da Xunta: a primeira execución
+só garda as ligazóns que xa hai; a partir de aí avisa das novas.
+
+A descrición nodo a nodo segue embaixo como referencia.
+
 Credenciais que precisa n8n:
 
 - **GitHub**: un token de grano fino só para `tremen-dev/carbugal`, con permisos

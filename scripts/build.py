@@ -287,8 +287,15 @@ fetch('/datos/arbores.geojson').then(r => r.json()).then(geo => {
   <label for="autor">Nome para o crédito da foto</label><input id="autor" name="autor" required>
   <label class="caixa"><input type="checkbox" name="terreo_privado" value="1"> Está en terreo privado ou é fráxil: mostrade só unha localización aproximada.</label>
   <label class="caixa"><input type="checkbox" name="licenza" value="CC BY-SA 4.0" required> A foto é miña e publícoa baixo licenza CC BY-SA 4.0.</label>
+  <p class="trampa" aria-hidden="true"><label for="web">Deixa isto baleiro</label><input id="web" name="web" tabindex="-1" autocomplete="off"></p>
   <p><button class="boton" type="submit">Enviar proposta</button></p>
 </form>
+<p id="estado-envio" role="status"></p>
+<script>
+const q = new URLSearchParams(location.search), m = document.getElementById("estado-envio");
+if (q.has("grazas")) m.textContent = "Grazas! Recibimos a proposta. Aparecerá no mapa cando pase as comprobacións do ciclo semanal.";
+if (q.has("erro")) m.textContent = "Non puidemos recibir a proposta: revisa que as coordenadas estean en Galicia e que engadiches a foto e o teu nome.";
+</script>
 """, ruta="/propon/"))
 
     # Sitemap, robots e dominio
