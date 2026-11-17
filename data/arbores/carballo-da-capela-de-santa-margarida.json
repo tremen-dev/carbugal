@@ -6,31 +6,56 @@
   },
   "commons_categoria": null,
   "concello": "Pontevedra",
-  "coords_aproximadas": false,
+  "coords_aproximadas": true,
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    },
+    {
+      "nome": "OpenStreetMap (Nominatim), localización aproximada",
+      "url": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.4375688&lng=-8.62634&radius=1"
     }
   ],
-  "fotos": [],
-  "lat": null,
-  "lon": null,
+  "fotos": [
+    {
+      "autor": "Ametsak",
+      "data": "2024-07-15",
+      "fonte": "iNaturalist",
+      "licenza": "CC0",
+      "orixe": "https://www.inaturalist.org/observations/237068947",
+      "proxima": true,
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/421854722/medium.jpeg"
+    }
+  ],
+  "lat": 42.4375688,
+  "lon": -8.62634,
   "lugar": "Capela de Santa Margarida",
   "medidas": {},
   "nome": "Carballo da Capela de Santa Margarida",
   "observacions": {
-    "fonte": null,
-    "total_1km": 0,
-    "ultima": null
+    "fonte": "iNaturalist",
+    "total_1km": 1,
+    "ultima": "2024-07-15"
   },
   "orixe": "xunta",
   "provincia": "Pontevedra",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "carballo-da-capela-de-santa-margarida",
   "texto": null,
   "wikidata": null

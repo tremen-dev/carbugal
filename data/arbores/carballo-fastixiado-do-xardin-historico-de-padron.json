@@ -6,31 +6,46 @@
   },
   "commons_categoria": null,
   "concello": "Padrón",
-  "coords_aproximadas": false,
+  "coords_aproximadas": true,
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L. Fastigiata",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    },
+    {
+      "nome": "OpenStreetMap (Nominatim), localización aproximada",
+      "url": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.7377482&lng=-8.6576045&radius=1"
     }
   ],
   "fotos": [],
-  "lat": null,
-  "lon": null,
+  "lat": 42.7377482,
+  "lon": -8.6576045,
   "lugar": "Xardín Artístico de Padrón",
   "medidas": {},
   "nome": "Carballo fastixiado do Xardín Histórico de Padrón",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "A Coruña",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "carballo-fastixiado-do-xardin-historico-de-padron",
   "texto": null,
   "wikidata": null

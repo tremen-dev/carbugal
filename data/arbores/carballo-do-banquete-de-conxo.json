@@ -10,11 +10,15 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2026/20261102/AnuncioG0760-071026-0002_gl.html"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.86124&lng=-8.55287&radius=1"
     }
   ],
   "fotos": [],
@@ -24,13 +28,20 @@
   "medidas": {},
   "nome": "Carballo do Banquete de Conxo",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "A Coruña",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "carballo-do-banquete-de-conxo",
   "texto": null,
   "wikidata": null

@@ -6,31 +6,46 @@
   },
   "commons_categoria": null,
   "concello": "Xermade",
-  "coords_aproximadas": false,
+  "coords_aproximadas": true,
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    },
+    {
+      "nome": "OpenStreetMap (Nominatim), localización aproximada",
+      "url": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=43.3640508&lng=-7.8180211&radius=1"
     }
   ],
   "fotos": [],
-  "lat": null,
-  "lon": null,
+  "lat": 43.3640508,
+  "lon": -7.8180211,
   "lugar": "Bosque de Mede",
   "medidas": {},
   "nome": "Carballo de Mede",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "Lugo",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "carballo-de-mede",
   "texto": null,
   "wikidata": null

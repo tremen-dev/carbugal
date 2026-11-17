@@ -10,11 +10,15 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus suber L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2023/20230508/AnuncioG0532-190423-0004_gl.html"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.51207&lng=-8.6726&radius=1"
     }
   ],
   "fotos": [],
@@ -24,13 +28,20 @@
   "medidas": {},
   "nome": "Sobreira de Outeda",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "Pontevedra",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "sobreira-de-outeda",
   "texto": null,
   "wikidata": null

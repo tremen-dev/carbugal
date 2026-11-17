@@ -1,0 +1,60 @@
+{
+  "actualizado": "2026-11-17",
+  "total": 499,
+  "especies": [
+    {
+      "especie": "Quercus pyrenaica",
+      "rexistros": 128
+    },
+    {
+      "especie": "Quercus robur",
+      "rexistros": 114
+    },
+    {
+      "especie": "Quercus suber",
+      "rexistros": 96
+    },
+    {
+      "especie": "Quercus ilex",
+      "rexistros": 60
+    },
+    {
+      "especie": "Quercus rubra",
+      "rexistros": 56
+    },
+    {
+      "especie": "Quercus petraea",
+      "rexistros": 14
+    },
+    {
+      "especie": "Quercus rotundifolia",
+      "rexistros": 10
+    },
+    {
+      "especie": "Quercus lusitanica",
+      "rexistros": 8
+    },
+    {
+      "especie": "Quercus orocantabrica",
+      "rexistros": 4
+    },
+    {
+      "especie": "Quercus coccifera",
+      "rexistros": 3
+    },
+    {
+      "especie": "Quercus faginea",
+      "rexistros": 3
+    },
+    {
+      "especie": "Quercus pubescens",
+      "rexistros": 2
+    },
+    {
+      "especie": "Quercus rosacea",
+      "rexistros": 1
+    }
+  ],
+  "fonte": "GBIF.org, Occurrence Search",
+  "consulta": "https://api.gbif.org/v1/occurrence/search?scientificName=Quercus&country=ES&decimalLatitude=41.8,43.8&decimalLongitude=-9.35,-6.7&license=CC0_1_0&license=CC_BY_4_0"
+}

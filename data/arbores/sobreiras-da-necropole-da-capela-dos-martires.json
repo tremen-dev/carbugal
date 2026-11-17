@@ -10,11 +10,15 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus suber L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2023/20231122/AnuncioG0691-151123-0001_gl.html"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.68959&lng=-8.61553&radius=1"
     }
   ],
   "fotos": [],
@@ -24,13 +28,20 @@
   "medidas": {},
   "nome": "Sobreiras da necrópole da Capela dos Mártires",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "Pontevedra",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "sobreiras-da-necropole-da-capela-dos-martires",
   "texto": null,
   "wikidata": null

@@ -10,11 +10,15 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2025/20251110/AnuncioG0760-311025-0002_gl.html"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.18292&lng=-7.70544&radius=1"
     }
   ],
   "fotos": [],
@@ -24,13 +28,20 @@
   "medidas": {},
   "nome": "Carballo de Padroso",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "Ourense",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "carballo-de-padroso",
   "texto": null,
   "wikidata": null

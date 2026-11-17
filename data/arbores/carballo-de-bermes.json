@@ -6,31 +6,46 @@
   },
   "commons_categoria": null,
   "concello": "Lalín",
-  "coords_aproximadas": false,
+  "coords_aproximadas": true,
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L.",
-  "estado": "candidato",
+  "estado": "so_mapa",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
       "url": "https://www.xunta.gal/dog/Publicados/2017/20171207/AnuncioG0422-291117-0001_gl.html"
+    },
+    {
+      "nome": "OpenStreetMap (Nominatim), localización aproximada",
+      "url": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.7181085&lng=-8.1383948&radius=1"
     }
   ],
   "fotos": [],
-  "lat": null,
-  "lon": null,
+  "lat": 42.7181085,
+  "lon": -8.1383948,
   "lugar": "Bermés",
   "medidas": {},
   "nome": "Carballo de Bermés",
   "observacions": {
-    "fonte": null,
+    "fonte": "iNaturalist",
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
   "provincia": "Pontevedra",
-  "qa": {},
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-17",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
   "slug": "carballo-de-bermes",
   "texto": null,
   "wikidata": null
