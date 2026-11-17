@@ -1,0 +1,37 @@
+{
+  "actualizado": "2026-11-17",
+  "catalogo_xunta": {
+    "codigo": "170A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2024/20241216/AnuncioG0760-101224-0004_gl.html"
+  },
+  "commons_categoria": null,
+  "concello": "A Mezquita",
+  "coords_aproximadas": false,
+  "coords_privadas": false,
+  "creado": "2026-11-17",
+  "especie": "Quercus pyrenaica Willd.",
+  "estado": "candidato",
+  "fontes": [
+    {
+      "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
+      "url": "https://www.xunta.gal/dog/Publicados/2024/20241216/AnuncioG0760-101224-0004_gl.html"
+    }
+  ],
+  "fotos": [],
+  "lat": 42.01092,
+  "lon": -7.03605,
+  "lugar": "Santigoso",
+  "medidas": {},
+  "nome": "Cerquiño de Santigoso",
+  "observacions": {
+    "fonte": null,
+    "total_1km": 0,
+    "ultima": null
+  },
+  "orixe": "xunta",
+  "provincia": "Ourense",
+  "qa": {},
+  "slug": "cerquino-de-santigoso",
+  "texto": null,
+  "wikidata": null
+}

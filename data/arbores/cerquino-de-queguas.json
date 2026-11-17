@@ -1,37 +1,37 @@
 {
   "actualizado": "2026-11-17",
   "catalogo_xunta": {
-    "codigo": "75A",
-    "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    "codigo": "154A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2017/20171207/AnuncioG0422-291117-0001_gl.html"
   },
   "commons_categoria": null,
-  "concello": "Cervantes",
+  "concello": "Entrimo",
   "coords_aproximadas": false,
   "coords_privadas": false,
   "creado": "2026-11-17",
-  "especie": "Quercus pyrenaica Will",
+  "especie": "Quercus pyrenaica Willd.",
   "estado": "candidato",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
-      "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+      "url": "https://www.xunta.gal/dog/Publicados/2017/20171207/AnuncioG0422-291117-0001_gl.html"
     }
   ],
   "fotos": [],
   "lat": null,
   "lon": null,
-  "lugar": "Quindous",
+  "lugar": "Cortes da Carballeira-Queguas",
   "medidas": {},
-  "nome": "Rebolo da Praza do Campo de Quindous",
+  "nome": "Cerquiño de Queguas",
   "observacions": {
     "fonte": null,
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
-  "provincia": "Lugo",
+  "provincia": "Ourense",
   "qa": {},
-  "slug": "rebolo-da-praza-do-campo-de-quindous",
+  "slug": "cerquino-de-queguas",
   "texto": null,
   "wikidata": null
 }

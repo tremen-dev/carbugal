@@ -1,11 +1,11 @@
 {
   "actualizado": "2026-11-17",
   "catalogo_xunta": {
-    "codigo": "93A",
-    "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    "codigo": "168A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2023/20231122/AnuncioG0691-151123-0001_gl.html"
   },
   "commons_categoria": null,
-  "concello": "A Estrada",
+  "concello": "Valga",
   "coords_aproximadas": false,
   "coords_privadas": false,
   "creado": "2026-11-17",
@@ -14,15 +14,15 @@
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
-      "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+      "url": "https://www.xunta.gal/dog/Publicados/2023/20231122/AnuncioG0691-151123-0001_gl.html"
     }
   ],
   "fotos": [],
-  "lat": null,
-  "lon": null,
-  "lugar": "Os Hórreos",
+  "lat": 42.68959,
+  "lon": -8.61553,
+  "lugar": "San Miguel de Valga",
   "medidas": {},
-  "nome": "Sobreira de Balvoa",
+  "nome": "Sobreiras da necrópole da Capela dos Mártires",
   "observacions": {
     "fonte": null,
     "total_1km": 0,
@@ -31,7 +31,7 @@
   "orixe": "xunta",
   "provincia": "Pontevedra",
   "qa": {},
-  "slug": "sobreira-de-balvoa",
+  "slug": "sobreiras-da-necropole-da-capela-dos-martires",
   "texto": null,
   "wikidata": null
 }

@@ -1,0 +1,37 @@
+{
+  "actualizado": "2026-11-17",
+  "catalogo_xunta": {
+    "codigo": "179A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2026/20261102/AnuncioG0760-071026-0002_gl.html"
+  },
+  "commons_categoria": null,
+  "concello": "Santiago de Compostela",
+  "coords_aproximadas": false,
+  "coords_privadas": false,
+  "creado": "2026-11-17",
+  "especie": "Quercus robur L.",
+  "estado": "candidato",
+  "fontes": [
+    {
+      "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
+      "url": "https://www.xunta.gal/dog/Publicados/2026/20261102/AnuncioG0760-071026-0002_gl.html"
+    }
+  ],
+  "fotos": [],
+  "lat": 42.86124,
+  "lon": -8.55287,
+  "lugar": "Santiago de Compostela",
+  "medidas": {},
+  "nome": "Carballo do Banquete de Conxo",
+  "observacions": {
+    "fonte": null,
+    "total_1km": 0,
+    "ultima": null
+  },
+  "orixe": "xunta",
+  "provincia": "A Coruña",
+  "qa": {},
+  "slug": "carballo-do-banquete-de-conxo",
+  "texto": null,
+  "wikidata": null
+}

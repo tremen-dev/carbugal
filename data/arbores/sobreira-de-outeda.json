@@ -1,0 +1,37 @@
+{
+  "actualizado": "2026-11-17",
+  "catalogo_xunta": {
+    "codigo": "167A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2023/20230508/AnuncioG0532-190423-0004_gl.html"
+  },
+  "commons_categoria": null,
+  "concello": "Barro",
+  "coords_aproximadas": false,
+  "coords_privadas": false,
+  "creado": "2026-11-17",
+  "especie": "Quercus suber L.",
+  "estado": "candidato",
+  "fontes": [
+    {
+      "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
+      "url": "https://www.xunta.gal/dog/Publicados/2023/20230508/AnuncioG0532-190423-0004_gl.html"
+    }
+  ],
+  "fotos": [],
+  "lat": 42.51207,
+  "lon": -8.6726,
+  "lugar": "Curro",
+  "medidas": {},
+  "nome": "Sobreira de Outeda",
+  "observacions": {
+    "fonte": null,
+    "total_1km": 0,
+    "ultima": null
+  },
+  "orixe": "xunta",
+  "provincia": "Pontevedra",
+  "qa": {},
+  "slug": "sobreira-de-outeda",
+  "texto": null,
+  "wikidata": null
+}

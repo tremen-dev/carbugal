@@ -1,11 +1,11 @@
 {
   "actualizado": "2026-11-17",
   "catalogo_xunta": {
-    "codigo": "77A",
-    "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    "codigo": "177A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2025/20251110/AnuncioG0760-311025-0002_gl.html"
   },
   "commons_categoria": null,
-  "concello": "Carballo",
+  "concello": "Xunqueira de Ambía",
   "coords_aproximadas": false,
   "coords_privadas": false,
   "creado": "2026-11-17",
@@ -14,24 +14,24 @@
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
-      "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+      "url": "https://www.xunta.gal/dog/Publicados/2025/20251110/AnuncioG0760-311025-0002_gl.html"
     }
   ],
   "fotos": [],
-  "lat": null,
-  "lon": null,
-  "lugar": "Pazo de Vilar de Arcos",
+  "lat": 42.18292,
+  "lon": -7.70544,
+  "lugar": "Padroso",
   "medidas": {},
-  "nome": "Carballo de Pazo de Vilardefrancos",
+  "nome": "Carballo de Padroso",
   "observacions": {
     "fonte": null,
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
-  "provincia": "A Coruña",
+  "provincia": "Ourense",
   "qa": {},
-  "slug": "carballo-de-pazo-de-vilardefrancos",
+  "slug": "carballo-de-padroso",
   "texto": null,
   "wikidata": null
 }

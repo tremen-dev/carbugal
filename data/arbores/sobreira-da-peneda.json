@@ -1,37 +1,37 @@
 {
   "actualizado": "2026-11-17",
   "catalogo_xunta": {
-    "codigo": "74A",
-    "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    "codigo": "158A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2021/20211109/AnuncioG0532-291021-0002_gl.html"
   },
   "commons_categoria": null,
-  "concello": "Cervantes",
+  "concello": "Redondela",
   "coords_aproximadas": false,
   "coords_privadas": false,
   "creado": "2026-11-17",
-  "especie": "Quercus petraea (Mattusch.) Liebl.",
+  "especie": "Quercus suber L.",
   "estado": "candidato",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
-      "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+      "url": "https://www.xunta.gal/dog/Publicados/2021/20211109/AnuncioG0532-291021-0002_gl.html"
     }
   ],
   "fotos": [],
-  "lat": null,
-  "lon": null,
-  "lugar": "Quindous",
+  "lat": 42.32624,
+  "lon": -8.59049,
+  "lugar": "Redondela",
   "medidas": {},
-  "nome": "Carballo albar da Praza do Campo de Quindous",
+  "nome": "Sobreira da Peneda",
   "observacions": {
     "fonte": null,
     "total_1km": 0,
     "ultima": null
   },
   "orixe": "xunta",
-  "provincia": "Lugo",
+  "provincia": "Pontevedra",
   "qa": {},
-  "slug": "carballo-albar-da-praza-do-campo-de-quindous",
+  "slug": "sobreira-da-peneda",
   "texto": null,
   "wikidata": null
 }
