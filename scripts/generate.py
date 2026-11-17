@@ -58,6 +58,7 @@ def datos_para_claude(a: dict) -> dict:
     return {
         "nome": a["nome"],
         "especie": a.get("especie"),
+        "lugar": a.get("lugar"),
         "concello": a.get("concello"),
         "provincia": a.get("provincia"),
         "no_catalogo_oficial_da_xunta": bool(a.get("catalogo_xunta")),

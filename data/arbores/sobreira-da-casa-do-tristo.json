@@ -1,0 +1,37 @@
+{
+  "actualizado": "2026-11-17",
+  "catalogo_xunta": {
+    "codigo": "96A",
+    "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+  },
+  "commons_categoria": null,
+  "concello": "A Pobra de Brollón",
+  "coords_aproximadas": false,
+  "coords_privadas": false,
+  "creado": "2026-11-17",
+  "especie": "Quercus suber L.",
+  "estado": "candidato",
+  "fontes": [
+    {
+      "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
+      "url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
+    }
+  ],
+  "fotos": [],
+  "lat": null,
+  "lon": null,
+  "lugar": "Casa do Tristo",
+  "medidas": {},
+  "nome": "Sobreira da Casa do Tristo",
+  "observacions": {
+    "fonte": null,
+    "total_1km": 0,
+    "ultima": null
+  },
+  "orixe": "xunta",
+  "provincia": "Lugo",
+  "qa": {},
+  "slug": "sobreira-da-casa-do-tristo",
+  "texto": null,
+  "wikidata": null
+}

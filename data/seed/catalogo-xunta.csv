@@ -1,1 +1,35 @@
-nome,especie,concello,provincia,lat,lon,perimetro_m,altura_m,codigo,privada,fonte_url
+codigo,nome,especie,lugar,concello,provincia,lat,lon,perimetro_m,altura_m,privada,fonte_url
+74A,Carballo albar da Praza do Campo de Quindous,Quercus petraea (Mattusch.) Liebl.,Quindous,Cervantes,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+75A,Rebolo da Praza do Campo de Quindous,Quercus pyrenaica Will,Quindous,Cervantes,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+76A,Rebolo do Pazo da Pena,Quercus pyrenaica Will,Pazo da Pena,Manzaneda,Ourense,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+77A,Carballo de Pazo de Vilardefrancos,Quercus robur L.,Pazo de Vilar de Arcos,Carballo,A Coruña,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+78A,Carballo de Ramos,Quercus robur L.,Casa de Ramos,Taboada,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+79A,Carballo do Viño ou Carballo de Pelete,Quercus robur L.,O Pelete,A Lama,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+80A,Carballo da Capela de Santa Margarida,Quercus robur L.,Capela de Santa Margarida,Pontevedra,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+81A,Carballa da Rocha,Quercus robur L.,A Touza,Rairiz de Veiga,Ourense,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+82A,Carballo do Pazo de Cartelos,Quercus robur L.,Pazo de Cartelos,Carballedo,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+83A,Carballo Grande de Bustelo de Abaixo,Quercus robur L.,Campo da Fonte,Carballedo,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+84A,Carballo da Casa do Herdeiro,Quercus robur L.,Casa de Herdeiro,Carballedo,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+85A,Carballos do Campo de Golf,Quercus robur L.,Campo de golf-Lugo,Lugo,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+86A,Carballo de Mede,Quercus robur L.,Bosque de Mede,Xermade,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+87A,Carballo da Casa Grande,Quercus robur L.,Praza do Carballo,Carballedo,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+88A,Carballo grande do Mestre,Quercus robur L.,Á beira da N-540,Carballedo,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+89A,Carballo grande de Reboreda,Quercus robur L.,Bosque de Caraveleira,A Porqueira,Ourense,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+90A,Carballo fastixiado do Pazo de Santa Cruz,Quercus robur L. Fastigiata,Pazo de Santa Cruz,Vedra,A Coruña,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+91A,Carballo fastixiado do Xardín Histórico de Padrón,Quercus robur L. Fastigiata,Xardín Artístico de Padrón,Padrón,A Coruña,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+92A,Aciñeira de Covas,Quercus ilex L. subsp. ballota (Desf.) Samp.,Predio próximo ao cemiterio,Rubiá,Ourense,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+93A,Sobreira de Balvoa,Quercus suber L.,Os Hórreos,A Estrada,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+94A,Sobreira do Pazo de Valiñas,Quercus suber L.,Pazo de Valiñas,A Estrada,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+95A,Sobreira do Cristo de Arriba,Quercus suber L.,Praza pública,Redondela,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+96A,Sobreira da Casa do Tristo,Quercus suber L.,Casa do Tristo,A Pobra de Brollón,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+128A,Carballo da Portela,Quercus robur L.,A Portela,Mondariz,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+129A,Carballo de Portacal,Quercus robur L.,Cumbraos,Sobrado,A Coruña,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+130A,Carballo de Freán,Quercus robur L.,Freán,Xermade,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+131A,Carballo de Vilatuxe,Quercus robur L.,Vilatuxe,Lalín,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+132A,Carballo de Soutolongo,Quercus robur L.,Soutolongo,Lalín,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+133A,Pai dos Rebolos,Quercus robur L.,Umoso-Dradela,Viana do Bolo,Ourense,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+134A,Carballo de Luxís,Quercus robur L.,Pacios,Castro de Rei,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+135A,Carballo de Cabanavella-I,Quercus robur L.,Cabanavella,Cervantes,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+136A,Carballo de Cabanavella-II,Quercus robur L.,Cabanavella,Cervantes,Lugo,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+137A,Sobreira de Loña,Quercus suber L.,Igrexa do Santo Cristo de Lonia,Ourense,Ourense,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html
+138A,Sobreira de Siador,Quercus suber L.,A Saleta,Silleda,Pontevedra,,,,,,https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html

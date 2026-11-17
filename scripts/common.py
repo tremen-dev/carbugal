@@ -106,7 +106,9 @@ def nova_arbore(nome: str, **campos) -> dict:
         "provincia": None,
         "lat": None,
         "lon": None,
+        "lugar": None,
         "coords_privadas": False,
+        "coords_aproximadas": False,
         "orixe": None,            # xunta | wikidata | proposta
         "catalogo_xunta": None,   # {"codigo": ..., "fonte_url": ...}
         "medidas": {},            # {"perimetro_m": {"valor": 7.2, "fonte": "..."}}

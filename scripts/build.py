@@ -59,7 +59,7 @@ def escribe(ruta: str, html: str) -> None:
 
 
 def coords_publicas(a: dict) -> tuple[float, float]:
-    if a.get("coords_privadas"):
+    if a.get("coords_privadas") or a.get("coords_aproximadas"):
         paso = CONFIG["arredondar_coords_paso"]
         return round(round(a["lat"] / paso) * paso, 4), round(round(a["lon"] / paso) * paso, 4)
     return round(a["lat"], 5), round(a["lon"], 5)
@@ -97,7 +97,10 @@ def ficha(a: dict) -> str:
     if obs.get("total_1km"):
         filas.append(("Carballos observados a menos de 1 km", f"{obs['total_1km']} (iNaturalist; última: {obs.get('ultima') or 's/d'})"))
     lat, lon = coords_publicas(a)
-    filas.append(("Localización", f"{lat}, {lon}" + (" (aproximada, terreo privado ou árbore fráxil)" if a.get("coords_privadas") else "")))
+    nota = (" (aproximada: terreo privado ou árbore fráxil)" if a.get("coords_privadas")
+            else " (aproximada: localización do lugar, non da árbore)" if a.get("coords_aproximadas") else "")
+    filas.append(("Lugar", a.get("lugar")))
+    filas.append(("Localización", f"{lat}, {lon}{nota}"))
     taboa = "".join(f"<tr><th>{e(k)}</th><td>{e(str(v))}</td></tr>" for k, v in filas if v)
     aviso = ""
     if a.get("orixe") == "proposta" and not (a.get("proposta") or {}).get("verificada"):

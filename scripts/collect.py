@@ -48,7 +48,7 @@ def importa_xunta() -> dict:
             slug = slugify(fila["nome"])
             a = arbores.get(slug) or nova_arbore(fila["nome"], orixe="xunta")
             novas += slug not in arbores
-            for campo in ("especie", "concello", "provincia"):
+            for campo in ("especie", "lugar", "concello", "provincia"):
                 if fila.get(campo):
                     a[campo] = fila[campo].strip()
             for campo in ("lat", "lon"):
@@ -102,14 +102,42 @@ def descubre_wikidata() -> dict:
         a["wikidata"] = qid
         a["especie"] = a["especie"] or (taxon or None)
         a["concello"] = a["concello"] or b.get("concelloLabel", {}).get("value")
-        a["lat"] = a["lat"] if a["lat"] is not None else lat
-        a["lon"] = a["lon"] if a["lon"] is not None else lon
+        if a["lat"] is None or a.get("coords_aproximadas"):  # Wikidata ten coordenadas da propia árbore
+            a["lat"], a["lon"], a["coords_aproximadas"] = lat, lon, False
         if b.get("commons"):
             a["commons_categoria"] = b["commons"]["value"]
         engade_fonte(a, "Wikidata", f"https://www.wikidata.org/wiki/{qid}")
         garda_arbore(a)
         arbores[a["slug"]] = a
     return {"fonte": "wikidata", "novas": novas}
+
+
+# ---------------------------------------------------------------- Xeocodificación
+NOMINATIM = "https://nominatim.openstreetmap.org/search"
+
+
+def xeocodifica() -> dict:
+    """Para árbores sen coordenadas: localización aproximada do lugar co OpenStreetMap (Nominatim).
+    Queda marcada como aproximada e substitúese se Wikidata trae as coordenadas da árbore."""
+    import time
+    feitas = 0
+    for a in le_arbores():
+        if a["lat"] is not None or not a.get("concello"):
+            continue
+        for consulta in filter(None, [
+                f"{a['lugar']}, {a['concello']}, Galicia" if a.get("lugar") else None,
+                f"{a['concello']}, {a.get('provincia') or ''}, Galicia"]):
+            time.sleep(1.1)  # política de uso de Nominatim: 1 petición por segundo
+            res = http_json(NOMINATIM, {"q": consulta, "format": "json", "limit": 1, "countrycodes": "es"})
+            if res and en_galicia(float(res[0]["lat"]), float(res[0]["lon"])):
+                a["lat"], a["lon"] = float(res[0]["lat"]), float(res[0]["lon"])
+                a["coords_aproximadas"] = True
+                engade_fonte(a, "OpenStreetMap (Nominatim), localización aproximada",
+                             "https://www.openstreetmap.org/copyright")
+                garda_arbore(a)
+                feitas += 1
+                break
+    return {"fonte": "nominatim", "xeocodificadas": feitas}
 
 
 # ---------------------------------------------------------------- Commons
@@ -263,7 +291,7 @@ def propostas_github() -> dict:
     return {"fonte": "propostas", "novas": novas}
 
 
-RECOLLEDORES = [importa_xunta, descubre_wikidata, fotos_commons, observacions_inat,
+RECOLLEDORES = [importa_xunta, descubre_wikidata, xeocodifica, fotos_commons, observacions_inat,
                 fenoloxia_inat, resumo_gbif, propostas_github]
 
 
