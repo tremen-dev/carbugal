@@ -31,7 +31,7 @@ jobs:
       - name: Recoller, xerar, verificar e construír
         id: ciclo
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/weekly.py
       - name: Gardar os datos no repositorio

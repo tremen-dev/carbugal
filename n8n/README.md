@@ -31,7 +31,7 @@ Credenciais que precisa n8n:
 
 Segredos que precisa o repositorio (Settings › Secrets and variables › Actions):
 
-- `ANTHROPIC_API_KEY`: a clave da API de Claude.
+- `DEEPSEEK_API_KEY`: a clave da API de DeepSeek.
 - `N8N_WEBHOOK_URL`: a URL do webhook do fluxo 3.
 
 ## 1. Propostas da web

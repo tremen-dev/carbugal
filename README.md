@@ -24,9 +24,9 @@ Fontes ──► Recoller ──► Xerar ──► Controis ──► Publicar 
 
 ## Posta en marcha
 
-1. Segredos do repositorio: `ANTHROPIC_API_KEY` e, cando estea o fluxo 3 de n8n, `N8N_WEBHOOK_URL`.
+1. Segredos do repositorio: `DEEPSEEK_API_KEY` e, cando estea o fluxo 3 de n8n, `N8N_WEBHOOK_URL`.
    Desde un equipo con `gh`:
-   `gh secret set ANTHROPIC_API_KEY -R tremen-dev/carbugal`
+   `gh secret set DEEPSEEK_API_KEY -R tremen-dev/carbugal`
 2. Settings › Pages › Source: **GitHub Actions**. Dominio personalizado: `carbugal.com`.
    No DNS de carbugal.com, os rexistros A/AAAA de GitHub Pages; carbugal.es redirixe con 301.
 3. Encher `config.json` (`responsable`, `contacto`, `n8n_formulario_url`).
@@ -40,7 +40,7 @@ Fontes ──► Recoller ──► Xerar ──► Controis ──► Publicar 
 ```
 pip install -r requirements.txt
 python -m unittest discover -s tests
-python scripts/weekly.py --sen-rede --sen-claude   # constrúe o sitio cos datos actuais
+python scripts/weekly.py --sen-rede --sen-ia   # constrúe o sitio cos datos actuais
 ```
 
 ## Licenzas

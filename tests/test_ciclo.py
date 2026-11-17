@@ -29,13 +29,13 @@ def arbore_exemplo(**cambios):
 
 
 class ClienteFalso:
-    """Imita client.messages.parse devolvendo as respostas da cola."""
+    """Imita ClienteDeepSeek.json devolvendo as respostas da cola."""
     def __init__(self, respostas):
         self.respostas = list(respostas)
-        self.messages = types.SimpleNamespace(parse=self._parse)
 
-    def _parse(self, **kw):
-        return types.SimpleNamespace(stop_reason="end_turn", parsed_output=self.respostas.pop(0))
+    def json(self, sistema, contido):
+        r = self.respostas.pop(0)
+        return r.model_dump() if hasattr(r, "model_dump") else r
 
 
 class Probas(unittest.TestCase):
@@ -75,8 +75,8 @@ class Probas(unittest.TestCase):
 
     def test_numero_inventado_retido(self):
         a = arbore_exemplo()
-        from generate import datos_para_claude
-        a["texto"] = {"resumo": "Un carballo vello.", "datos_usados": datos_para_claude(a),
+        from generate import datos_para_modelo
+        a["texto"] = {"resumo": "Un carballo vello.", "datos_usados": datos_para_modelo(a),
                       "frases": [{"texto": "Mide 7.5 metros.", "campos": []}, {"texto": "Ten 300 anos.", "campos": []},
                                  {"texto": "É un Quercus robur.", "campos": []}]}
         r = self.qa.avalia(a, [])
@@ -85,8 +85,8 @@ class Probas(unittest.TestCase):
 
     def test_texto_correcto_publicado(self):
         a = arbore_exemplo()
-        from generate import datos_para_claude
-        a["texto"] = {"resumo": "Un carballo do catálogo oficial.", "datos_usados": datos_para_claude(a),
+        from generate import datos_para_modelo
+        a["texto"] = {"resumo": "Un carballo do catálogo oficial.", "datos_usados": datos_para_modelo(a),
                       "frases": [{"texto": "Mide 7.5 metros de perímetro.", "campos": []},
                                  {"texto": "É un Quercus robur de Lugo.", "campos": []},
                                  {"texto": "Hai 12 observacións de carballos preto.", "campos": []}]}

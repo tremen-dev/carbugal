@@ -16,4 +16,4 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests
-      - run: python scripts/weekly.py --sen-rede --sen-claude
+      - run: python scripts/weekly.py --sen-rede --sen-ia
