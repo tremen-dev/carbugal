@@ -1,0 +1,55 @@
+:root{
+  --musgo:#3F5A3A;--casca:#5B4636;--liquen:#A9B79A;--landra:#B9853F;--neboa:#F3F1EA;--lousa:#2A2E2B;
+  --branco:#FFFFFF;--borde:#D9D5C7;
+  --serif:"Fraunces",Georgia,serif;--sans:"Source Sans 3",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--neboa);color:var(--lousa);font-family:var(--sans);font-size:18px;line-height:1.6}
+a{color:var(--musgo)}a:hover{color:var(--lousa)}
+h1,h2,h3{font-family:var(--serif);line-height:1.15;color:var(--musgo);font-weight:600}
+h1{font-size:clamp(2rem,5vw,3.2rem);margin:.2em 0}
+h2{font-size:1.6rem;margin-top:2em}
+.envoltorio{max-width:1080px;margin:0 auto;padding:0 20px}
+header.cab{background:var(--branco);border-bottom:1px solid var(--borde)}
+header.cab .envoltorio{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none}
+.marca .nome{font-family:var(--serif);font-weight:600;font-size:1.6rem;color:var(--musgo);line-height:1}
+.marca .nome span{color:var(--landra)}
+.marca .sub{font-family:var(--serif);font-size:.85rem;color:var(--casca)}
+nav ul{list-style:none;margin:0;padding:0;display:flex;column-gap:18px;row-gap:0;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:600;min-height:44px;display:inline-flex;align-items:center}
+main{padding:24px 0 64px}
+.lema{font-family:var(--serif);font-size:1.3rem;color:var(--casca)}
+.grella{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.tarxeta{background:var(--branco);border:1px solid var(--borde);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.tarxeta img{width:100%;height:190px;object-fit:cover;display:block;background:var(--liquen)}
+.tarxeta .corpo{padding:16px 18px}
+.tarxeta h3{margin:0 0 6px;font-size:1.25rem}
+.meta{color:var(--casca);font-size:.95rem}
+.boton{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:22px;background:var(--landra);color:var(--lousa);font-weight:600;text-decoration:none;border:0;cursor:pointer;font:inherit}
+.boton.sec{background:transparent;border:1.5px solid var(--musgo);color:var(--musgo)}
+figure{margin:0 0 20px}
+figure img{width:100%;max-height:560px;object-fit:cover;border-radius:12px;display:block}
+figcaption{font-size:.85rem;color:var(--casca);margin-top:6px}
+table.ficha{border-collapse:collapse;width:100%;background:var(--branco);border-radius:12px;overflow:hidden}
+table.ficha th,table.ficha td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.ficha th{width:38%;color:var(--casca);font-weight:600}
+.aviso{background:#EFE6D3;border-left:4px solid var(--landra);padding:12px 16px;border-radius:6px}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.galeria img{height:160px}
+#mapa{height:70vh;min-height:420px;border-radius:12px;border:1px solid var(--borde)}
+footer{background:var(--musgo);color:var(--neboa);padding:32px 0;font-size:.95rem}
+footer a{color:var(--neboa)}
+form label{display:block;font-weight:600;margin-top:14px}
+form input,form textarea,form select{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--borde);border-radius:8px;background:var(--branco)}
+form .caixa{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+form .caixa input{width:auto;margin-top:6px}
+.barras{width:100%;height:auto}
+@media (prefers-color-scheme:dark){
+  body{background:#1E211F;color:#E9E6DC}
+  h1,h2,h3,.marca .nome{color:#B7C9A8}
+  a{color:#B7C9A8}
+  header.cab,.tarxeta,table.ficha,form input,form textarea,form select{background:#272B28;border-color:#3A3F3B;color:#E9E6DC}
+  .meta,.lema,figcaption,table.ficha th,.marca .sub{color:#CDBBA8}
+  .aviso{background:#2F2A20}
+}

@@ -1,0 +1,68 @@
+name: Ciclo semanal
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"        # luns ás 05:00 UTC
+  workflow_dispatch:
+  repository_dispatch:
+    types: [dog-novidade, proposta]   # lanzados por n8n
+
+permissions:
+  contents: write
+  issues: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ciclo-semanal
+  cancel-in-progress: false
+
+jobs:
+  ciclo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Probas
+        run: python -m unittest discover -s tests
+      - name: Recoller, xerar, verificar e construír
+        id: ciclo
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/weekly.py
+      - name: Gardar os datos no repositorio
+        if: always() && steps.ciclo.outcome != 'skipped'
+        run: |
+          git config user.name "carbugal-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Ciclo semanal $(date -u +%F)"
+          git push
+      - uses: actions/upload-pages-artifact@v3
+        if: success()
+        with:
+          path: _site
+      - name: Avisar a n8n
+        if: always()
+        env:
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+          RESULTADO: ${{ job.status }}
+        run: |
+          if [ -z "$N8N_WEBHOOK_URL" ]; then exit 0; fi
+          INFORME=$(cat data/informe.json 2>/dev/null || echo '{}')
+          curl -sS -X POST "$N8N_WEBHOOK_URL" -H "Content-Type: application/json" \
+            -d "{\"resultado\":\"$RESULTADO\",\"execucion\":\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\",\"informe\":$INFORME}"
+
+  publicar:
+    needs: ciclo
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despregue.outputs.page_url }}
+    steps:
+      - id: despregue
+        uses: actions/deploy-pages@v4

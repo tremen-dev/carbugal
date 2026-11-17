@@ -1,0 +1,16 @@
+{
+  "site_url": "https://carbugal.com",
+  "nome": "Carballos Únicos de Galiza",
+  "nome_curto": "carbugal",
+  "lema": "Cada carballo ten a súa historia.",
+  "responsable": "[NOME DO RESPONSABLE OU ASOCIACIÓN]",
+  "contacto": "[CORREO DE CONTACTO]",
+  "n8n_formulario_url": "[URL DO WEBHOOK DE n8n PARA PROPOSTAS]",
+  "modelo_claude": "claude-opus-5-5",
+  "max_paxinas_novas_semana": 4,
+  "radio_observacions_km": 1,
+  "min_datos_ficha": 6,
+  "min_fontes_ficha": 2,
+  "min_frases_verificadas": 3,
+  "arredondar_coords_paso": 0.005
+}
