@@ -20,6 +20,7 @@ import json
 import math
 import os
 import re
+import urllib.parse
 
 from common import (CONFIG, DATA, en_galicia, engade_fonte, engade_foto, garda_arbore,
                     hoxe, http_json, le_arbores, nova_arbore, slugify)
@@ -71,7 +72,14 @@ def importa_xunta() -> dict:
 SPARQL = """
 SELECT ?item ?itemLabel ?coord ?commons ?taxonLabel ?concelloLabel WHERE {
   VALUES ?tipo { wd:Q10884 wd:Q811534 }
-  ?item wdt:P31 ?tipo ; wdt:P625 ?coord ; wdt:P131+ wd:Q3908 .
+  ?item wdt:P31 ?tipo .
+  # Caixa xeográfica de Galicia: moito máis rápida que percorrer P131+ (que esgotaba o tempo).
+  SERVICE wikibase:box {
+    ?item wdt:P625 ?coord .
+    bd:serviceParam wikibase:cornerSouthWest "Point(-9.35 41.80)"^^geo:wktLiteral .
+    bd:serviceParam wikibase:cornerNorthEast "Point(-6.70 43.80)"^^geo:wktLiteral .
+  }
+  ?item wdt:P131+ wd:Q3908 .   # só Galicia (a caixa colle tamén Portugal e Asturias)
   OPTIONAL { ?item wdt:P10241 ?taxon . }
   OPTIONAL { ?item wdt:P373 ?commons . }
   OPTIONAL { ?item wdt:P131 ?concello . }
@@ -81,8 +89,11 @@ SELECT ?item ?itemLabel ?coord ?commons ?taxonLabel ?concelloLabel WHERE {
 
 
 def descubre_wikidata() -> dict:
-    res = http_json(WIKIDATA_SPARQL, {"query": SPARQL, "format": "json"},
-                    headers={"Accept": "application/sparql-results+json"})
+    # POST: a consulta vai no corpo e non nunha URL longa.
+    corpo = urllib.parse.urlencode({"query": SPARQL, "format": "json"}).encode()
+    res = http_json(WIKIDATA_SPARQL, data=corpo, timeout=90,
+                    headers={"Accept": "application/sparql-results+json",
+                             "Content-Type": "application/x-www-form-urlencoded"})
     arbores = _por_slug()
     novas = 0
     for b in res["results"]["bindings"]:
