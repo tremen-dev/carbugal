@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-17T23:28:38+00:00",
+  "data": "2026-11-23T15:35:49+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -7,13 +7,13 @@
       "ok": true
     },
     {
-      "fonte": "descubre_wikidata",
-      "ok": false,
-      "erro": "Fallou https://query.wikidata.org/sparql?query=%0ASELECT+%3Fitem+%3FitemLabel+%3Fcoord+%3Fcommons+%3FtaxonLabel+%3FconcelloLabel+WHERE+%7B%0A++VALUES+%3Ftipo+%7B+wd%3AQ10884+wd%3AQ811534+%7D%0A++%3Fitem+wdt%3AP31+%3Ftipo+%3B+wdt%3AP625+%3Fcoord+%3B+wdt%3AP131%2B+wd%3AQ3908+.%0A++OPTIONAL+%7B+%3Fitem"
+      "fonte": "wikidata",
+      "novas": 0,
+      "ok": true
     },
     {
       "fonte": "nominatim",
-      "xeocodificadas": 32,
+      "xeocodificadas": 0,
       "ok": true
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "fonte": "inaturalist",
-      "fotos_novas": 1,
+      "fotos_novas": 0,
       "ok": true
     },
     {
@@ -45,7 +45,7 @@
   "publicadas": [],
   "retidas": [],
   "erros": [
-    "falta o segredo ANTHROPIC_API_KEY: esta semana non se redactan textos"
+    "falta o segredo DEEPSEEK_API_KEY: esta semana non se redactan textos"
   ],
   "sitio": {
     "paxinas": 0,
