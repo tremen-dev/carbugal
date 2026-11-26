@@ -1,6 +1,6 @@
 """Ciclo semanal completo: recoller, xerar, verificar, publicar.
 
-Uso:  python scripts/weekly.py [--sen-ia] [--sen-rede]
+Uso:  python scripts/weekly.py [--sen-claude] [--sen-rede]
 Saída: data/informe.json (o que n8n le para avisar) e o sitio en _site/.
 """
 from __future__ import annotations
@@ -31,7 +31,7 @@ def pegada(datos: dict) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sen-ia", "--sen-claude", dest="sen_ia", action="store_true", help="non xera textos (probas)")
+    ap.add_argument("--sen-claude", action="store_true", help="non xera textos (probas)")
     ap.add_argument("--sen-rede", action="store_true", help="non consulta fontes (probas)")
     args = ap.parse_args()
 
@@ -49,19 +49,19 @@ def main() -> int:
         informe["erros"].append("máis da metade das fontes fallaron: esta semana non se publican fichas novas")
 
     # 2. Xerar textos (con tope semanal)
-    from generate import CLAVE_ENV
-    sen_clave = not os.environ.get(CLAVE_ENV)
-    if sen_clave and not args.sen_ia:
-        informe["erros"].append(f"falta o segredo {CLAVE_ENV}: esta semana non se redactan textos")
-    if not args.sen_ia and not sen_clave and not fontes_caidas:
-        from generate import ClienteDeepSeek, datos_para_modelo, redacta_e_verifica
-        cliente = ClienteDeepSeek()
+    sen_clave = not os.environ.get("ANTHROPIC_API_KEY")
+    if sen_clave and not args.sen_claude:
+        informe["erros"].append("falta o segredo ANTHROPIC_API_KEY: esta semana non se redactan textos")
+    if not args.sen_claude and not sen_clave and not fontes_caidas:
+        import anthropic
+        from generate import datos_para_claude, redacta_e_verifica
+        cliente = anthropic.Anthropic()
         tope = CONFIG["max_paxinas_novas_semana"]
         candidatas = []
         for a in le_arbores():
             if not qa.suficiente(a) or not qa.en_galicia(a.get("lat"), a.get("lon")):
                 continue  # sen contido suficiente: non paga a pena xerar texto
-            novos_datos = pegada(datos_para_modelo(a)) != (a.get("texto") or {}).get("pegada")
+            novos_datos = pegada(datos_para_claude(a)) != (a.get("texto") or {}).get("pegada")
             if a.get("estado") != "publicado" or novos_datos:
                 candidatas.append(a)
         # primeiro as do catálogo oficial, despois as máis documentadas
@@ -73,7 +73,7 @@ def main() -> int:
                 informe["erros"].append(f"{a['slug']}: {str(ex)[:200]}")
                 continue
             if t:
-                t["pegada"] = pegada(datos_para_modelo(a))
+                t["pegada"] = pegada(datos_para_claude(a))
             a["texto"] = t
             a["actualizado"] = hoxe()
             garda_arbore(a)

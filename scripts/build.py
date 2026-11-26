@@ -245,7 +245,7 @@ fetch('/datos/arbores.geojson').then(r => r.json()).then(geo => {
     # Páxinas fixas
     escribe("/como-se-fai/", paxina("Como se fai esta web", f"""
 <h1>Como se fai esta web</h1>
-<p>Esta web actualízase soa cada semana. Un programa recolle datos de fontes abertas (o Catálogo galego de árbores senlleiras da Xunta, Wikidata, Wikimedia Commons, iNaturalist, GBIF e o Inventario Forestal Nacional), constrúe as fichas e o mapa, e redacta os textos coa axuda dun modelo de intelixencia artificial (DeepSeek).</p>
+<p>Esta web actualízase soa cada semana. Un programa recolle datos de fontes abertas (o Catálogo galego de árbores senlleiras da Xunta, Wikidata, Wikimedia Commons, iNaturalist, GBIF e o Inventario Forestal Nacional), constrúe as fichas e o mapa, e redacta os textos coa axuda dun modelo de intelixencia artificial (Claude, de Anthropic).</p>
 <p>Os textos só poden usar os datos da propia ficha. Despois, unha segunda revisión automática comproba frase a frase que todo o que se di está nos datos; o que non se pode comprobar elimínase. Tamén se revisan os números, a lingua e que os textos non se repitan entre fichas.</p>
 <p>Só se usan fotos con licenzas libres (CC0, CC BY e CC BY-SA), sempre co nome do autor e unha ligazón á orixe. Se unha foto desaparece da súa orixe, retírase.</p>
 <p>Publícanse como moito {CONFIG['max_paxinas_novas_semana']} fichas novas por semana. Os cambios quedan no <a href="/rexistro/">rexistro público</a>. Se atopas un erro, escríbenos a {e(CONFIG['contacto'])}.</p>

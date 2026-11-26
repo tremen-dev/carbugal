@@ -1,29 +1,25 @@
-"""Textos das fichas cun modelo de IA (DeepSeek), ancorados só nos datos da propia ficha.
+"""Textos das fichas con Claude, ancorados só nos datos da propia ficha.
 
-1. `redacta`: o modelo escribe un resumo e unhas frases, e indica para cada frase
+1. `redacta`: Claude escribe un resumo e unhas frases, e indica para cada frase
    que campos dos datos a sosteñen.
 2. `verifica`: unha segunda chamada, independente, contrasta cada frase cos
    datos e marca as que non están sostidas. Esas frases elimínanse.
-Se a resposta non é JSON válido co formato pedido, a ficha queda sen texto e
-qa.py retena.
-
-A API de DeepSeek é compatible coa de OpenAI; chámase con urllib, sen dependencias.
-A clave lese da variable de contorno DEEPSEEK_API_KEY (segredo do repositorio).
+Se Claude declina a petición (stop_reason "refusal"), a ficha queda sen texto e
+qa.py retena; non se reintenta con outro modelo.
 """
 from __future__ import annotations
 
 import json
-import os
-import time
-import urllib.request
+from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 
-from common import CONFIG, USER_AGENT, agora
+from common import CONFIG, agora
 
-MODELO = CONFIG["modelo_ia"]
-API_URL = CONFIG["ia_api_url"]
-CLAVE_ENV = "DEEPSEEK_API_KEY"
+if TYPE_CHECKING:
+    import anthropic
+
+MODELO = CONFIG["modelo_claude"]
 
 SISTEMA_REDACCION = """Es o redactor de Carballos Únicos de Galiza, un catálogo divulgativo e sen ánimo de lucro dos carballos senlleiros de Galicia.
 Escribes en galego normativo, con ton próximo, tranquilo e documental.
@@ -38,11 +34,6 @@ Regras:
 SISTEMA_VERIFICACION = """Es un verificador. Recibes un JSON de datos e unha lista de frases en galego.
 Para cada frase decide se TODO o que afirma está sostido polos datos. Calquera dato, número, data, adxectivo valorativo ou relación que non estea nos datos fai que a frase non estea sostida.
 Responde para cada frase co seu índice, sostida true/false e un motivo curto."""
-
-FORMATO = {
-    "Redaccion": 'Responde só cun obxecto JSON: {"resumo": "...", "frases": [{"texto": "...", "campos": ["..."]}]}',
-    "Verificacion": 'Responde só cun obxecto JSON: {"veredictos": [{"indice": 0, "sostida": true, "motivo": "..."}]}',
-}
 
 
 class Frase(BaseModel):
@@ -65,8 +56,8 @@ class Verificacion(BaseModel):
     veredictos: list[Veredicto]
 
 
-def datos_para_modelo(a: dict) -> dict:
-    """Só os feitos que o modelo pode usar: sen URLs de fotos nin estados internos."""
+def datos_para_claude(a: dict) -> dict:
+    """Só os feitos que Claude pode usar: sen URLs de fotos nin estados internos."""
     return {
         "nome": a["nome"],
         "especie": a.get("especie"),
@@ -83,58 +74,24 @@ def datos_para_modelo(a: dict) -> dict:
     }
 
 
-datos_para_claude = datos_para_modelo  # nome antigo
-
-
-class ClienteDeepSeek:
-    """Chamada mínima a /chat/completions en modo JSON."""
-
-    def __init__(self, clave: str | None = None):
-        self.clave = clave or os.environ[CLAVE_ENV]
-
-    def json(self, sistema: str, contido: str) -> dict | None:
-        corpo = json.dumps({
-            "model": MODELO,
-            "messages": [{"role": "system", "content": sistema},
-                         {"role": "user", "content": contido}],
-            "response_format": {"type": "json_object"},
-            "temperature": 0.3,
-            "max_tokens": 4000,
-        }).encode()
-        cab = {"Authorization": f"Bearer {self.clave}", "Content-Type": "application/json",
-               "User-Agent": USER_AGENT}
-        for intento in range(3):
-            try:
-                req = urllib.request.Request(API_URL, data=corpo, headers=cab)
-                with urllib.request.urlopen(req, timeout=180) as r:
-                    resposta = json.loads(r.read().decode("utf-8"))
-                break
-            except Exception:
-                if intento == 2:
-                    raise
-                time.sleep(5 * (intento + 1))
-        escolla = resposta["choices"][0]
-        if escolla.get("finish_reason") not in ("stop", None):
-            return None  # cortada ou filtrada
-        try:
-            return json.loads(escolla["message"]["content"] or "")
-        except json.JSONDecodeError:
-            return None
-
-
-def _chama(cliente, sistema: str, contido: str, formato):
-    bruto = cliente.json(sistema + "\n\n" + FORMATO[formato.__name__], contido)
-    if not bruto:
+def _chama(cliente: anthropic.Anthropic, sistema: str, contido: str, formato):
+    r = cliente.messages.parse(
+        model=MODELO,
+        max_tokens=4000,
+        system=sistema,
+        messages=[{"role": "user", "content": contido}],
+        output_format=formato,
+    )
+    if r.stop_reason == "refusal" or r.parsed_output is None:
         return None
-    try:
-        return formato.model_validate(bruto)
-    except ValidationError:
-        return None
+    return r.parsed_output
 
 
-def redacta_e_verifica(a: dict, cliente=None) -> dict | None:
-    cliente = cliente or ClienteDeepSeek()
-    datos = datos_para_modelo(a)
+def redacta_e_verifica(a: dict, cliente: anthropic.Anthropic | None = None) -> dict | None:
+    if cliente is None:
+        import anthropic
+        cliente = anthropic.Anthropic()
+    datos = datos_para_claude(a)
     datos_json = json.dumps(datos, ensure_ascii=False, indent=2)
     red = _chama(cliente, SISTEMA_REDACCION, f"Datos da árbore:\n{datos_json}", Redaccion)
     if red is None:
