@@ -17,7 +17,7 @@ NUMERO = re.compile(r"\d+(?:[.,]\d+)?")
 
 
 def conta_datos(a: dict) -> int:
-    datos = [a.get("especie"), a.get("concello"), a.get("provincia"), a.get("lat"),
+    datos = [a.get("especie"), a.get("lugar"), a.get("concello"), a.get("provincia"), a.get("lat"),
              a.get("catalogo_xunta"), a.get("wikidata"),
              (a.get("observacions") or {}).get("total_1km")]
     return sum(1 for d in datos if d) + len(a.get("medidas") or {})
@@ -86,7 +86,7 @@ def avalia(a: dict, outras: list[dict]) -> dict:
         motivos.append(f"números sen soporte nos datos: {', '.join(sen_soporte)}")
     if CASTELAN.search(plano):
         motivos.append("posible castelán mesturado no texto")
-    erros = erros_languagetool(plano)
+    erros = erros_languagetool(plano, especie=a.get("especie"))
     if len(erros) > 2:  # os topónimos dan algún falso positivo: tolérase ata 2
         motivos.append(f"{len(erros)} erros de lingua segundo LanguageTool")
     for o in outras:
@@ -103,9 +103,14 @@ def avalia(a: dict, outras: list[dict]) -> dict:
     return {"estado": "retido" if motivos else "publicado", "motivos": motivos, "avisos": avisos}
 
 
-def erros_languagetool(texto: str) -> list[str]:
+_FONTES_PROPIAS = {"openstreetmap", "inaturalist", "wikidata", "wikimedia", "gbif"}
+
+
+def erros_languagetool(texto: str, especie: str | None = None) -> list[str]:
     """Revisión ortográfica e gramatical en galego coa API pública de LanguageTool.
     Se a API non responde, devolve [] e o ciclo segue (queda o filtro de castelán)."""
+    if especie:
+        texto = texto.replace(especie, "carballo")
     try:
         import urllib.parse
         r = http_json("https://api.languagetool.org/v2/check",
@@ -113,5 +118,12 @@ def erros_languagetool(texto: str) -> list[str]:
                       headers={"Content-Type": "application/x-www-form-urlencoded"}, retries=1)
     except Exception:
         return []
-    return [m["message"] for m in r.get("matches", [])
-            if m.get("rule", {}).get("issueType") in ("misspelling", "grammar")]
+    erros = []
+    for m in r.get("matches", []):
+        if m.get("rule", {}).get("issueType") not in ("misspelling", "grammar"):
+            continue
+        token = texto[m["offset"]:m["offset"] + m["length"]].lower()
+        if token in _FONTES_PROPIAS:
+            continue
+        erros.append(m["message"])
+    return erros
