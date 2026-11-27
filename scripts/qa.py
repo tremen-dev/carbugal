@@ -86,7 +86,13 @@ def avalia(a: dict, outras: list[dict]) -> dict:
         motivos.append(f"números sen soporte nos datos: {', '.join(sen_soporte)}")
     if CASTELAN.search(plano):
         motivos.append("posible castelán mesturado no texto")
-    texto_lt = plano.replace(a["especie"], "carballo") if a.get("especie") else plano
+    texto_lt = plano
+    if a.get("especie"):
+        texto_lt = texto_lt.replace(a["especie"], "carballo")
+    for campo in ("nome", "lugar", "concello"):
+        val = a.get(campo)
+        if val:
+            texto_lt = texto_lt.replace(val, "Galicia")
     erros = erros_languagetool(texto_lt)
     if len(erros) > 2:  # os topónimos dan algún falso positivo: tolérase ata 2
         motivos.append(f"{len(erros)} erros de lingua segundo LanguageTool")
@@ -104,7 +110,7 @@ def avalia(a: dict, outras: list[dict]) -> dict:
     return {"estado": "retido" if motivos else "publicado", "motivos": motivos, "avisos": avisos}
 
 
-_FONTES_PROPIAS = {"openstreetmap", "inaturalist", "wikidata", "wikimedia", "gbif"}
+_FONTES_PROPIAS = {"openstreetmap", "nominatim", "inaturalist", "wikidata", "wikimedia", "gbif"}
 
 
 def erros_languagetool(texto: str) -> list[str]:
