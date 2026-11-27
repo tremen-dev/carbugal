@@ -23,9 +23,22 @@
     {
       "nome": "iNaturalist",
       "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.6922538&lng=-8.4443333&radius=1"
+    },
+    {
+      "nome": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/w/index.php?search=Sobreira%20do%20Pazo%20de%20Vali%C3%B1as"
     }
   ],
-  "fotos": [],
+  "fotos": [
+    {
+      "autor": "m.dolores paderne sa…",
+      "data": "Taken on 2",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 3.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Sobreira_do_Pazo_de_Vali%C3%B1as_(Callobre)_%C3%81rbores_senlleiras_de_Galicia_-_panoramio.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sobreira_do_Pazo_de_Vali%C3%B1as_%28Callobre%29_%C3%81rbores_senlleiras_de_Galicia_-_panoramio.jpg/1280px-Sobreira_do_Pazo_de_Vali%C3%B1as_%28Callobre%29_%C3%81rbores_senlleiras_de_Galicia_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    }
+  ],
   "lat": 42.6922538,
   "lon": -8.4443333,
   "lugar": "Pazo de Valiñas",

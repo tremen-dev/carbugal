@@ -19,9 +19,22 @@
     {
       "nome": "iNaturalist",
       "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.32624&lng=-8.59049&radius=1"
+    },
+    {
+      "nome": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/w/index.php?search=Sobreira%20da%20Peneda"
     }
   ],
-  "fotos": [],
+  "fotos": [
+    {
+      "autor": "Estevoaei",
+      "data": "2008-05-19",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 4.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Sobreira_na_Peneda.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Sobreira_na_Peneda.jpg/1280px-Sobreira_na_Peneda.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    }
+  ],
   "lat": 42.32624,
   "lon": -8.59049,
   "lugar": "Redondela",

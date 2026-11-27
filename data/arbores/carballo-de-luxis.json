@@ -23,9 +23,22 @@
     {
       "nome": "iNaturalist",
       "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=43.2617579&lng=-7.3896778&radius=1"
+    },
+    {
+      "nome": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/w/index.php?search=Carballo%20de%20Lux%C3%ADs"
     }
   ],
-  "fotos": [],
+  "fotos": [
+    {
+      "autor": "Gabriel González",
+      "data": "2011-11-17",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY 2.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Carballo_Luxis_Castro_de_Rei.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Carballo_Luxis_Castro_de_Rei.jpg/1280px-Carballo_Luxis_Castro_de_Rei.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    }
+  ],
   "lat": 43.2617579,
   "lon": -7.3896778,
   "lugar": "Pacios",

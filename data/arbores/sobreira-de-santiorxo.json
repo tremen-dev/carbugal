@@ -1,0 +1,45 @@
+{
+  "actualizado": "2026-11-27",
+  "catalogo_xunta": null,
+  "commons_categoria": null,
+  "concello": "Santiorxo",
+  "coords_aproximadas": false,
+  "coords_privadas": false,
+  "creado": "2026-11-27",
+  "especie": "sobreira",
+  "estado": "so_mapa",
+  "fontes": [
+    {
+      "nome": "Wikidata",
+      "url": "https://www.wikidata.org/wiki/Q12400571"
+    },
+    {
+      "nome": "iNaturalist",
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.5002543&lng=-7.393138&radius=1"
+    }
+  ],
+  "fotos": [],
+  "lat": 42.5002543,
+  "lon": -7.393138,
+  "lugar": null,
+  "medidas": {},
+  "nome": "sobreira de Santiorxo",
+  "observacions": {
+    "fonte": "iNaturalist",
+    "total_1km": 0,
+    "ultima": null
+  },
+  "orixe": "wikidata",
+  "provincia": null,
+  "qa": {
+    "avisos": [],
+    "data": "2026-11-27",
+    "estado": "so_mapa",
+    "motivos": [
+      "contido insuficiente para páxina propia"
+    ]
+  },
+  "slug": "sobreira-de-santiorxo",
+  "texto": null,
+  "wikidata": "Q12400571"
+}

@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-27T00:05:37+00:00",
+  "data": "2026-11-27T00:13:45+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -8,7 +8,7 @@
     },
     {
       "fonte": "wikidata",
-      "novas": 0,
+      "novas": 1,
       "ok": true
     },
     {
@@ -18,7 +18,7 @@
     },
     {
       "fonte": "commons",
-      "fotos_novas": 0,
+      "fotos_novas": 12,
       "ok": true
     },
     {
@@ -41,9 +41,18 @@
       "ok": true
     }
   ],
-  "xeradas": [],
+  "xeradas": [
+    "acineira-de-covas"
+  ],
   "publicadas": [],
-  "retidas": [],
+  "retidas": [
+    {
+      "slug": "acineira-de-covas",
+      "motivos": [
+        "3 erros de lingua segundo LanguageTool"
+      ]
+    }
+  ],
   "erros": [],
   "sitio": {
     "paxinas": 0,

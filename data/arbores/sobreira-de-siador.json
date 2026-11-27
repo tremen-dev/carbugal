@@ -23,9 +23,30 @@
     {
       "nome": "iNaturalist",
       "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.6873638&lng=-8.2697931&radius=1"
+    },
+    {
+      "nome": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/w/index.php?search=Sobreira%20de%20Siador"
     }
   ],
-  "fotos": [],
+  "fotos": [
+    {
+      "autor": "Irimz",
+      "data": "2025-02-07",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 4.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Sobreira_de_Siador,_Penadagra,_Silleda.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Sobreira_de_Siador%2C_Penadagra%2C_Silleda.jpg/1280px-Sobreira_de_Siador%2C_Penadagra%2C_Silleda.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "autor": "Irimz",
+      "data": "2025-02-07",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 4.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Sobreira_de_Siador,_en_Silleda.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Sobreira_de_Siador%2C_en_Silleda.jpg/1280px-Sobreira_de_Siador%2C_en_Silleda.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    }
+  ],
   "lat": 42.6873638,
   "lon": -8.2697931,
   "lugar": "A Saleta",

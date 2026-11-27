@@ -23,9 +23,38 @@
     {
       "nome": "iNaturalist",
       "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.7204134&lng=-7.7478417&radius=1"
+    },
+    {
+      "nome": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/w/index.php?search=Carballo%20de%20Ramos"
     }
   ],
-  "fotos": [],
+  "fotos": [
+    {
+      "autor": "Satna",
+      "data": "2018-05-05",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 4.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:CarballoRamos.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/CarballoRamos.jpg/1280px-CarballoRamos.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "autor": "Varelarubin",
+      "data": "2016-04-13",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 4.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Carballo_de_Ramos,_Taboada.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Carballo_de_Ramos%2C_Taboada.png/1280px-Carballo_de_Ramos%2C_Taboada.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "autor": "Estevoaei",
+      "data": "2026-07-30",
+      "fonte": "Wikimedia Commons",
+      "licenza": "CC BY-SA 4.0",
+      "orixe": "https://commons.wikimedia.org/wiki/File:Lembranza_a_Jes%C3%BAs_Ramos_Mart%C3%ADnez_xunto_%C3%A1_capela_da_Santa_do_Carballo_(O_Aparral,_As_Pontes).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Lembranza_a_Jes%C3%BAs_Ramos_Mart%C3%ADnez_xunto_%C3%A1_capela_da_Santa_do_Carballo_%28O_Aparral%2C_As_Pontes%29.jpg/1280px-Lembranza_a_Jes%C3%BAs_Ramos_Mart%C3%ADnez_xunto_%C3%A1_capela_da_Santa_do_Carballo_%28O_Aparral%2C_As_Pontes%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    }
+  ],
   "lat": 42.7204134,
   "lon": -7.7478417,
   "lugar": "Casa de Ramos",
