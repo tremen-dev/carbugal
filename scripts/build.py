@@ -46,7 +46,7 @@ def paxina(titulo: str, corpo: str, descricion: str = "", ruta: str = "/", extra
   <p><a href="/como-se-fai/">Como se fai esta web</a> · <a href="/creditos/">Créditos e licenzas</a> ·
      <a href="/rexistro/">Rexistro de cambios</a> · <a href="/en-cifras/">En cifras</a> · <a href="/sobre/">Aviso legal</a></p>
   <p>Textos baixo <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.gl">CC BY-SA 4.0</a>. Cada foto leva o seu autor e licenza. Mapa © colaboradores de OpenStreetMap.</p>
-  <p class="pe-tremen">Un proxecto de <a class="tremen" href="https://tremen.dev" target="_blank" rel="noopener noreferrer"><img src="/static/tremen.svg" width="18" height="18" alt=""><span>tremen<span class="dev">.dev</span></span></a></p>
+  <p class="pe-tremen">Un proxecto de <a class="tremen" href="https://tremen.dev" target="_blank" rel="noopener noreferrer"><svg class="br" viewBox="7 9 18 46" width="7" height="18" aria-hidden="true"><path d="M22 12 C16 12 14 16 14 22 L14 28 C14 30 13 32 10 32 C13 32 14 34 14 36 L14 42 C14 48 16 52 22 52" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/></svg><span>tremen<span class="dev">.dev</span></span><svg class="br" viewBox="39 9 18 46" width="7" height="18" aria-hidden="true"><path d="M42 12 C48 12 50 16 50 22 L50 28 C50 30 51 32 54 32 C51 32 50 34 50 36 L50 42 C50 48 48 52 42 52" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/></svg></a></p>
 </div></footer>
 </body>
 </html>
