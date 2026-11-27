@@ -70,7 +70,7 @@ def importa_xunta() -> dict:
 
 # ---------------------------------------------------------------- Wikidata
 SPARQL = """
-SELECT ?item ?itemLabel ?coord ?commons ?taxonLabel ?concelloLabel WHERE {
+SELECT ?item ?itemLabel ?coord ?commons ?imaxe ?taxonLabel ?concelloLabel WHERE {
   VALUES ?tipo { wd:Q10884 wd:Q811534 }
   ?item wdt:P31 ?tipo .
   # Caixa xeográfica de Galicia: moito máis rápida que percorrer P131+ (que esgotaba o tempo).
@@ -82,6 +82,7 @@ SELECT ?item ?itemLabel ?coord ?commons ?taxonLabel ?concelloLabel WHERE {
   ?item wdt:P131+ wd:Q3908 .   # só Galicia (a caixa colle tamén Portugal e Asturias)
   OPTIONAL { ?item wdt:P10241 ?taxon . }
   OPTIONAL { ?item wdt:P373 ?commons . }
+  OPTIONAL { ?item wdt:P18 ?imaxe . }
   OPTIONAL { ?item wdt:P131 ?concello . }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "gl,es,en". }
 }
@@ -99,7 +100,13 @@ def descubre_wikidata() -> dict:
     for b in res["results"]["bindings"]:
         nome = b["itemLabel"]["value"]
         taxon = b.get("taxonLabel", {}).get("value", "")
-        if not (taxon.startswith("Quercus") or "carball" in nome.lower() or "carvalh" in nome.lower()):
+        nome_l = nome.lower()
+        en_catalogo = slugify(nome) in arbores
+        e_quercus = (
+            taxon.startswith("Quercus")
+            or any(p in nome_l for p in ("carball", "carvalh", "sobreira", "aciñeira", "cerquiñ", "rebolo"))
+        )
+        if not (en_catalogo or e_quercus):
             continue
         m = re.match(r"Point\(([-\d.]+) ([-\d.]+)\)", b["coord"]["value"])
         lon, lat = (float(m.group(1)), float(m.group(2))) if m else (None, None)
@@ -117,6 +124,8 @@ def descubre_wikidata() -> dict:
             a["lat"], a["lon"], a["coords_aproximadas"] = lat, lon, False
         if b.get("commons"):
             a["commons_categoria"] = b["commons"]["value"]
+        if b.get("imaxe"):
+            a["wikidata_imaxe"] = urllib.parse.unquote(b["imaxe"]["value"].rsplit("/", 1)[-1])
         engade_fonte(a, "Wikidata", f"https://www.wikidata.org/wiki/{qid}")
         garda_arbore(a)
         arbores[a["slug"]] = a
@@ -152,35 +161,92 @@ def xeocodifica() -> dict:
 
 
 # ---------------------------------------------------------------- Commons
+_COMMONS_STOP = {
+    "carballo", "carballos", "carballa", "sobreira", "sobreiras", "acineira",
+    "cerquino", "rebolo", "grande", "vello", "pazo", "casa", "capela",
+    "campo", "xardin", "historico", "fastixiado",
+}
+_COMMONS_ARBORE = ("carball", "sobreir", "acineir", "cerquin", "rebol", "quercus", "arbor")
+_COMMONS_EXTS = (".jpg", ".jpeg", ".png", ".webp")
+
+
 def _limpa_html(t: str) -> str:
     return html.unescape(re.sub(r"<[^>]+>", "", t or "")).strip()
+
+
+def _engade_imaxes_commons(a: dict, params: dict) -> int:
+    res = http_json(COMMONS, {
+        "action": "query", "format": "json", "prop": "imageinfo",
+        "iiprop": "url|extmetadata", "iiurlwidth": 1200, **params,
+    })
+    engadidas = 0
+    for paxina in (res.get("query", {}).get("pages", {}) or {}).values():
+        info = (paxina.get("imageinfo") or [{}])[0]
+        if not info.get("url"):
+            continue
+        meta = info.get("extmetadata", {})
+        engadidas += engade_foto(a, {
+            "url": info.get("thumburl") or info.get("url"),
+            "autor": _limpa_html(meta.get("Artist", {}).get("value", "")),
+            "licenza": meta.get("LicenseShortName", {}).get("value"),
+            "orixe": info.get("descriptionurl"),
+            "data": (meta.get("DateTimeOriginal", {}).get("value") or "")[:10] or None,
+            "fonte": "Wikimedia Commons",
+        })
+    return engadidas
+
+
+def _palabras_clave(slug: str) -> list[str]:
+    return [w for w in slug.split("-") if len(w) >= 4 and w not in _COMMONS_STOP]
 
 
 def fotos_commons() -> dict:
     engadidas = 0
     for a in le_arbores():
+        antes = engadidas
         if not a.get("commons_categoria"):
-            continue
-        res = http_json(COMMONS, {
-            "action": "query", "format": "json", "generator": "categorymembers",
-            "gcmtitle": f"Category:{a['commons_categoria']}", "gcmtype": "file", "gcmlimit": 20,
-            "prop": "imageinfo", "iiprop": "url|extmetadata", "iiurlwidth": 1200,
-        })
-        for paxina in (res.get("query", {}).get("pages", {}) or {}).values():
-            info = (paxina.get("imageinfo") or [{}])[0]
-            meta = info.get("extmetadata", {})
-            ok = engade_foto(a, {
-                "url": info.get("thumburl") or info.get("url"),
-                "autor": _limpa_html(meta.get("Artist", {}).get("value", "")),
-                "licenza": meta.get("LicenseShortName", {}).get("value"),
-                "orixe": info.get("descriptionurl"),
-                "data": (meta.get("DateTimeOriginal", {}).get("value") or "")[:10] or None,
-                "fonte": "Wikimedia Commons",
+            res_cat = http_json(COMMONS, {
+                "action": "query", "format": "json", "list": "search",
+                "srsearch": f'"{a["nome"]}"', "srnamespace": "14", "srlimit": "3",
             })
-            engadidas += ok
-        engade_fonte(a, "Wikimedia Commons",
-                     f"https://commons.wikimedia.org/wiki/Category:{a['commons_categoria'].replace(' ', '_')}")
-        garda_arbore(a)
+            for h in res_cat.get("query", {}).get("search", []):
+                cat = h["title"].removeprefix("Category:")
+                if slugify(cat) == a["slug"]:
+                    a["commons_categoria"] = cat
+                    break
+        if a.get("commons_categoria"):
+            engadidas += _engade_imaxes_commons(a, {
+                "generator": "categorymembers",
+                "gcmtitle": f"Category:{a['commons_categoria']}",
+                "gcmtype": "file", "gcmlimit": 20,
+            })
+            engade_fonte(a, "Wikimedia Commons",
+                         f"https://commons.wikimedia.org/wiki/Category:{a['commons_categoria'].replace(' ', '_')}")
+        if a.get("wikidata_imaxe"):
+            engadidas += _engade_imaxes_commons(a, {"titles": f"File:{a['wikidata_imaxe']}"})
+        ten_propia = any(not f.get("proxima") for f in a.get("fotos", []))
+        kws = _palabras_clave(a["slug"])
+        if not ten_propia and kws:
+            res_f = http_json(COMMONS, {
+                "action": "query", "format": "json", "list": "search",
+                "srsearch": a["nome"], "srnamespace": "6", "srlimit": "8",
+            })
+            titulos = []
+            for h in res_f.get("query", {}).get("search", []):
+                t = h["title"]
+                if not t.lower().endswith(_COMMONS_EXTS):
+                    continue
+                tslug = slugify(t.removeprefix("File:").rsplit(".", 1)[0])
+                if all(k in tslug for k in kws) and any(x in tslug for x in _COMMONS_ARBORE):
+                    titulos.append(t)
+            if titulos:
+                n = _engade_imaxes_commons(a, {"titles": "|".join(titulos[:5])})
+                engadidas += n
+                if n:
+                    engade_fonte(a, "Wikimedia Commons",
+                                 f"https://commons.wikimedia.org/w/index.php?search={urllib.parse.quote(a['nome'])}")
+        if engadidas > antes or a.get("commons_categoria"):
+            garda_arbore(a)
     return {"fonte": "commons", "fotos_novas": engadidas}
 
 
