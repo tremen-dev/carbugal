@@ -10,7 +10,7 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus ilex L. subsp. ballota (Desf.) Samp.",
-  "estado": "retido",
+  "estado": "publicado",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
@@ -83,13 +83,12 @@
   },
   "orixe": "xunta",
   "provincia": "Ourense",
+  "publicado_en": "2026-11-27",
   "qa": {
     "avisos": [],
     "data": "2026-11-27",
-    "estado": "retido",
-    "motivos": [
-      "3 erros de lingua segundo LanguageTool"
-    ]
+    "estado": "publicado",
+    "motivos": []
   },
   "slug": "acineira-de-covas",
   "texto": {
@@ -114,16 +113,14 @@
       "provincia": "Ourense",
       "ultima_observacion_proxima": null
     },
-    "descartadas": [
-      "Polo de agora non hai rexistradas observacións doutros carballos a menos dun quilómetro dela."
-    ],
+    "descartadas": [],
     "frases": [
       {
         "campos": [
           "nome",
           "especie"
         ],
-        "texto": "A Aciñeira de Covas é un exemplar de Quercus ilex L. subsp. ballota (Desf.) Samp."
+        "texto": "A Aciñeira de Covas é un exemplar da especie Quercus ilex L. subsp. ballota (Desf.) Samp."
       },
       {
         "campos": [
@@ -138,25 +135,31 @@
           "no_catalogo_oficial_da_xunta",
           "fontes"
         ],
-        "texto": "Esta árbore forma parte do Catálogo galego de árbores senlleiras da Xunta de Galicia."
+        "texto": "Forma parte do Catálogo galego de árbores senlleiras da Xunta de Galicia."
+      },
+      {
+        "campos": [
+          "observacions_de_carballos_a_menos_de_1_km"
+        ],
+        "texto": "Polo de agora non hai rexistrada ningunha observación doutros carballos a menos dun quilómetro."
       },
       {
         "campos": [
           "numero_de_fotos_propias"
         ],
-        "texto": "Contamos con catro fotografías propias desta aciñeira."
+        "texto": "A súa ficha conta con catro fotografías propias desta árbore."
       },
       {
         "campos": [
           "fontes"
         ],
-        "texto": "A información procede do catálogo da Xunta, OpenStreetMap, iNaturalist, Wikidata e Wikimedia Commons, e a localización é aproximada."
+        "texto": "A información procede tamén de OpenStreetMap, que achega unha localización aproximada, e de iNaturalist, Wikidata e Wikimedia Commons."
       }
     ],
     "modelo": "claude-opus-5-5",
     "pegada": "2b79a776a8bbc173",
-    "resumo": "A Aciñeira de Covas medra nun predio próximo ao cemiterio, en Rubiá (Ourense), e figura no catálogo oficial de árbores senlleiras da Xunta.",
-    "xerado": "2026-11-27T00:15:13+00:00"
+    "resumo": "A Aciñeira de Covas é unha árbore senlleira catalogada pola Xunta, situada nun predio próximo ao cemiterio, en Rubiá (Ourense).",
+    "xerado": "2026-11-27T00:21:22+00:00"
   },
   "wikidata": "Q12382443",
   "wikidata_imaxe": "Aciñeira de Covas 01.jpg"

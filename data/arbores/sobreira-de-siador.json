@@ -10,7 +10,7 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus suber L.",
-  "estado": "so_mapa",
+  "estado": "retido",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
@@ -62,9 +62,9 @@
   "qa": {
     "avisos": [],
     "data": "2026-11-27",
-    "estado": "so_mapa",
+    "estado": "retido",
     "motivos": [
-      "contido insuficiente para páxina propia"
+      "sen texto verificado"
     ]
   },
   "slug": "sobreira-de-siador",

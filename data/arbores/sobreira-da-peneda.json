@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-17",
+  "actualizado": "2026-11-27",
   "catalogo_xunta": {
     "codigo": "158A",
     "fonte_url": "https://www.xunta.gal/dog/Publicados/2021/20211109/AnuncioG0532-291021-0002_gl.html"
@@ -10,7 +10,7 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus suber L.",
-  "estado": "so_mapa",
+  "estado": "publicado",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
@@ -47,15 +47,76 @@
   },
   "orixe": "xunta",
   "provincia": "Pontevedra",
+  "publicado_en": "2026-11-27",
   "qa": {
     "avisos": [],
     "data": "2026-11-27",
-    "estado": "so_mapa",
-    "motivos": [
-      "contido insuficiente para páxina propia"
-    ]
+    "estado": "publicado",
+    "motivos": []
   },
   "slug": "sobreira-da-peneda",
-  "texto": null,
+  "texto": {
+    "datos_usados": {
+      "concello": "Redondela",
+      "especie": "Quercus suber L.",
+      "fontes": [
+        "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
+        "iNaturalist",
+        "Wikimedia Commons"
+      ],
+      "historia_aportada_pola_comunidade": null,
+      "lugar": "Redondela",
+      "medidas": {},
+      "no_catalogo_oficial_da_xunta": true,
+      "nome": "Sobreira da Peneda",
+      "numero_de_fotos_propias": 1,
+      "observacions_de_carballos_a_menos_de_1_km": 0,
+      "provincia": "Pontevedra",
+      "ultima_observacion_proxima": null
+    },
+    "descartadas": [
+      "Neste catálogo consérvase unha fotografía propia desta árbore."
+    ],
+    "frases": [
+      {
+        "campos": [
+          "nome",
+          "especie"
+        ],
+        "texto": "A Sobreira da Peneda é unha árbore da especie Quercus suber L., a sobreira."
+      },
+      {
+        "campos": [
+          "lugar",
+          "concello",
+          "provincia"
+        ],
+        "texto": "Atópase en Redondela, no concello do mesmo nome, na provincia de Pontevedra."
+      },
+      {
+        "campos": [
+          "no_catalogo_oficial_da_xunta",
+          "fontes"
+        ],
+        "texto": "Forma parte do Catálogo galego de árbores senlleiras da Xunta de Galicia."
+      },
+      {
+        "campos": [
+          "observacions_de_carballos_a_menos_de_1_km"
+        ],
+        "texto": "Polo de agora non hai observacións rexistradas doutros carballos a menos dun quilómetro dela."
+      },
+      {
+        "campos": [
+          "fontes"
+        ],
+        "texto": "A información procede do catálogo da Xunta, de iNaturalist e de Wikimedia Commons."
+      }
+    ],
+    "modelo": "claude-opus-5-5",
+    "pegada": "e5c5e76ee1cd5578",
+    "resumo": "A Sobreira da Peneda é unha sobreira de Redondela, na provincia de Pontevedra, recollida no catálogo oficial de árbores senlleiras da Xunta.",
+    "xerado": "2026-11-27T00:22:02+00:00"
+  },
   "wikidata": null
 }

@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-17",
+  "actualizado": "2026-11-27",
   "catalogo_xunta": {
     "codigo": "134A",
     "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
@@ -10,7 +10,7 @@
   "coords_privadas": false,
   "creado": "2026-11-17",
   "especie": "Quercus robur L.",
-  "estado": "so_mapa",
+  "estado": "retido",
   "fontes": [
     {
       "nome": "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
@@ -54,12 +54,74 @@
   "qa": {
     "avisos": [],
     "data": "2026-11-27",
-    "estado": "so_mapa",
+    "estado": "retido",
     "motivos": [
-      "contido insuficiente para páxina propia"
+      "4 erros de lingua segundo LanguageTool"
     ]
   },
   "slug": "carballo-de-luxis",
-  "texto": null,
+  "texto": {
+    "datos_usados": {
+      "concello": "Castro de Rei",
+      "especie": "Quercus robur L.",
+      "fontes": [
+        "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
+        "OpenStreetMap (Nominatim), localización aproximada",
+        "iNaturalist",
+        "Wikimedia Commons"
+      ],
+      "historia_aportada_pola_comunidade": null,
+      "lugar": "Pacios",
+      "medidas": {},
+      "no_catalogo_oficial_da_xunta": true,
+      "nome": "Carballo de Luxís",
+      "numero_de_fotos_propias": 1,
+      "observacions_de_carballos_a_menos_de_1_km": 0,
+      "provincia": "Lugo",
+      "ultima_observacion_proxima": null
+    },
+    "descartadas": [
+      "O Carballo de Luxís é un exemplar de Quercus robur L., o carballo común das nosas terras."
+    ],
+    "frases": [
+      {
+        "campos": [
+          "lugar",
+          "concello",
+          "provincia"
+        ],
+        "texto": "Atópase no lugar de Pacios, no concello de Castro de Rei, na provincia de Lugo."
+      },
+      {
+        "campos": [
+          "no_catalogo_oficial_da_xunta",
+          "fontes"
+        ],
+        "texto": "Forma parte do Catálogo galego de árbores senlleiras da Xunta de Galicia."
+      },
+      {
+        "campos": [
+          "numero_de_fotos_propias"
+        ],
+        "texto": "Polo de agora, este catálogo conta cunha fotografía propia da árbore."
+      },
+      {
+        "campos": [
+          "observacions_de_carballos_a_menos_de_1_km"
+        ],
+        "texto": "Aínda non hai rexistradas observacións doutros carballos a menos dun quilómetro."
+      },
+      {
+        "campos": [
+          "fontes"
+        ],
+        "texto": "A súa localización é aproximada e procede de OpenStreetMap, a través de Nominatim."
+      }
+    ],
+    "modelo": "claude-opus-5-5",
+    "pegada": "803bae91e2cc4436",
+    "resumo": "O Carballo de Luxís é un carballo (Quercus robur L.) de Pacios, en Castro de Rei, recollido no catálogo oficial de árbores senlleiras da Xunta.",
+    "xerado": "2026-11-27T00:21:34+00:00"
+  },
   "wikidata": null
 }

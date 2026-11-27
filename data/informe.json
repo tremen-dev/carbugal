@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-27T00:13:45+00:00",
+  "data": "2026-11-27T00:20:17+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -8,7 +8,7 @@
     },
     {
       "fonte": "wikidata",
-      "novas": 1,
+      "novas": 0,
       "ok": true
     },
     {
@@ -18,7 +18,7 @@
     },
     {
       "fonte": "commons",
-      "fotos_novas": 12,
+      "fotos_novas": 0,
       "ok": true
     },
     {
@@ -42,20 +42,39 @@
     }
   ],
   "xeradas": [
-    "acineira-de-covas"
+    "acineira-de-covas",
+    "carballo-de-luxis",
+    "carballo-de-ramos",
+    "sobreira-da-peneda"
   ],
-  "publicadas": [],
+  "publicadas": [
+    "acineira-de-covas",
+    "carballo-de-ramos",
+    "sobreira-da-peneda"
+  ],
   "retidas": [
     {
-      "slug": "acineira-de-covas",
+      "slug": "carballo-de-luxis",
       "motivos": [
-        "3 erros de lingua segundo LanguageTool"
+        "4 erros de lingua segundo LanguageTool"
+      ]
+    },
+    {
+      "slug": "sobreira-de-siador",
+      "motivos": [
+        "sen texto verificado"
+      ]
+    },
+    {
+      "slug": "sobreira-do-pazo-de-valinas",
+      "motivos": [
+        "sen texto verificado"
       ]
     }
   ],
   "erros": [],
   "sitio": {
-    "paxinas": 0,
-    "no_mapa": 38
+    "paxinas": 3,
+    "no_mapa": 36
   }
 }
