@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-27T00:20:17+00:00",
+  "data": "2026-11-27T00:24:35+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -42,39 +42,19 @@
     }
   ],
   "xeradas": [
-    "acineira-de-covas",
     "carballo-de-luxis",
-    "carballo-de-ramos",
-    "sobreira-da-peneda"
+    "sobreira-de-siador",
+    "sobreira-do-pazo-de-valinas"
   ],
   "publicadas": [
-    "acineira-de-covas",
-    "carballo-de-ramos",
-    "sobreira-da-peneda"
+    "carballo-de-luxis",
+    "sobreira-de-siador",
+    "sobreira-do-pazo-de-valinas"
   ],
-  "retidas": [
-    {
-      "slug": "carballo-de-luxis",
-      "motivos": [
-        "4 erros de lingua segundo LanguageTool"
-      ]
-    },
-    {
-      "slug": "sobreira-de-siador",
-      "motivos": [
-        "sen texto verificado"
-      ]
-    },
-    {
-      "slug": "sobreira-do-pazo-de-valinas",
-      "motivos": [
-        "sen texto verificado"
-      ]
-    }
-  ],
+  "retidas": [],
   "erros": [],
   "sitio": {
-    "paxinas": 3,
-    "no_mapa": 36
+    "paxinas": 6,
+    "no_mapa": 39
   }
 }
