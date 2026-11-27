@@ -1,6 +1,6 @@
 # Carballos Únicos de Galiza
 
-Catálogo aberto e sen ánimo de lucro dos carballos senlleiros de Galicia, en
+Catálogo aberto e sen ánimo de lucro dos carballos senlleiros de Galiza, en
 [carbugal.com](https://carbugal.com). A web actualízase soa cada semana a partir de fontes
 abertas, e só se publica o que pasa os controis automáticos.
 

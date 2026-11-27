@@ -99,28 +99,84 @@ class Probas(unittest.TestCase):
         self.assertIn("posible castelán mesturado no texto", self.qa.avalia(a, [])["motivos"])
 
     def test_construe_sitio(self):
+        import re
+        import xml.etree.ElementTree as ET
         import build
         tmp = Path(tempfile.mkdtemp())
-        orixinal = (common.ARBORES, build.SITE_OUT)
+        orixinal = (common.ARBORES, build.SITE_OUT, build.le_arbores)
         try:
             arb = tmp / "arbores"; arb.mkdir()
-            a = arbore_exemplo(estado="publicado", coords_privadas=True,
+            a = arbore_exemplo(estado="publicado", coords_privadas=True, actualizado="2026-01-15",
+                               publicado_en="2026-01-10",
                                texto={"resumo": "Resumo <script>", "frases": [{"texto": "Frase.", "campos": []}]})
             (arb / f"{a['slug']}.json").write_text(json.dumps(a), encoding="utf-8")
             common.ARBORES = arb
             build.SITE_OUT = tmp / "_site"
-            import importlib
             build.le_arbores = lambda: [json.loads(p.read_text()) for p in arb.glob("*.json")]
             r = build.construe()
             self.assertEqual(r["paxinas"], 1)
-            ficha = (tmp / "_site" / "carballos" / a["slug"] / "index.html").read_text()
+
+            portada = (tmp / "_site" / "index.html").read_text(encoding="utf-8")
+            self.assertIn("<title>Carballos Únicos de Galiza · Catálogo e mapa de árbores senlleiras</title>", portada)
+            self.assertNotIn("Inicio ·", portada)
+            self.assertIn('href="https://fonts.gstatic.com" crossorigin', portada)
+            self.assertIn('href="/static/favicon-48.png"', portada)
+            self.assertIn('href="/static/icona-192.png"', portada)
+            self.assertIn('href="/static/apple-touch-icon.png"', portada)
+            self.assertIn('property="og:locale" content="gl_ES"', portada)
+            self.assertIn('name="twitter:card"', portada)
+
+            ld_portada = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', portada).group(1))
+            tipos_portada = {n["@type"] for n in ld_portada["@graph"]}
+            self.assertEqual(tipos_portada, {"WebSite", "Organization"})
+
+            ficha = (tmp / "_site" / "carballos" / a["slug"] / "index.html").read_text(encoding="utf-8")
             self.assertIn("Resumo &lt;script&gt;", ficha)
             self.assertIn("aproximada", ficha)
+            self.assertIn('alt="Carballo de Proba (Quercus robur) en Concello de Proba"', ficha)
+            self.assertIn('fetchpriority="high"', ficha)
+            self.assertNotIn('alt="" fetchpriority="high"', ficha)
+
+            # A foto principal non debe levar loading="lazy"
+            img_principal = re.search(r'<figure class=""><img [^>]+>', ficha).group(0)
+            self.assertNotIn('loading="lazy"', img_principal)
+
+            # JSON-LD seguro fronte a </script> e parseable
+            ld_raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', ficha).group(1)
+            self.assertNotIn("<script>", ld_raw)
+            ld_ficha = json.loads(ld_raw)
+            grafo = {n["@type"]: n for n in ld_ficha["@graph"]}
+            self.assertIn("BreadcrumbList", grafo)
+            self.assertAlmostEqual(grafo["Place"]["geo"]["latitude"] % 0.005, 0, places=6)
+            self.assertEqual(grafo["Place"]["image"][0]["license"], "https://creativecommons.org/licenses/by-sa/4.0/")
+
+            # Metadescricións únicas nas seccións principais
+            desc_sobre = re.search(r'<meta name="description" content="([^"]+)">',
+                                   (tmp / "_site" / "sobre" / "index.html").read_text(encoding="utf-8")).group(1)
+            desc_mapa = re.search(r'<meta name="description" content="([^"]+)">',
+                                  (tmp / "_site" / "mapa" / "index.html").read_text(encoding="utf-8")).group(1)
+            self.assertNotEqual(desc_sobre, common.CONFIG["lema"])
+            self.assertNotEqual(desc_mapa, desc_sobre)
+
+            # 404.html con noindex e sen canonical
+            p404 = (tmp / "_site" / "404.html").read_text(encoding="utf-8")
+            self.assertIn('content="noindex, follow"', p404)
+            self.assertNotIn('rel="canonical"', p404)
+
+            # Sitemap con lastmod real na ficha e sen lastmod en /sobre/
+            root = ET.fromstring((tmp / "_site" / "sitemap.xml").read_text(encoding="utf-8"))
+            ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+            urls = {u.find("s:loc", ns).text: (u.find("s:lastmod", ns).text if u.find("s:lastmod", ns) is not None else None)
+                    for u in root.findall("s:url", ns)}
+            self.assertEqual(urls[f"https://carbugal.com/carballos/{a['slug']}/"], "2026-01-15")
+            self.assertIsNone(urls["https://carbugal.com/sobre/"])
+            self.assertNotIn("https://carbugal.com/404.html", urls)
+
             geo = json.loads((tmp / "_site" / "datos" / "arbores.geojson").read_text())
             lon, lat = geo["features"][0]["geometry"]["coordinates"]
             self.assertAlmostEqual(lat % 0.005, 0, places=6)
         finally:
-            common.ARBORES, build.SITE_OUT = orixinal
+            common.ARBORES, build.SITE_OUT, build.le_arbores = orixinal
             shutil.rmtree(tmp)
 
 
