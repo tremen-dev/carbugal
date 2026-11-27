@@ -46,6 +46,7 @@ def paxina(titulo: str, corpo: str, descricion: str = "", ruta: str = "/", extra
   <p><a href="/como-se-fai/">Como se fai esta web</a> · <a href="/creditos/">Créditos e licenzas</a> ·
      <a href="/rexistro/">Rexistro de cambios</a> · <a href="/en-cifras/">En cifras</a> · <a href="/sobre/">Aviso legal</a></p>
   <p>Textos baixo <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.gl">CC BY-SA 4.0</a>. Cada foto leva o seu autor e licenza. Mapa © colaboradores de OpenStreetMap.</p>
+  <p class="pe-tremen">Un proxecto de <a class="tremen" href="https://tremen.dev" target="_blank" rel="noopener noreferrer"><img src="/static/tremen.svg" width="18" height="18" alt=""><span>tremen<span class="dev">.dev</span></span></a></p>
 </div></footer>
 </body>
 </html>

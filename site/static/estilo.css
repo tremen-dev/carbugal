@@ -40,6 +40,10 @@ table.ficha th{width:38%;color:var(--casca);font-weight:600}
 #mapa{height:70vh;min-height:420px;border-radius:12px;border:1px solid var(--borde)}
 footer{background:var(--musgo);color:var(--neboa);padding:32px 0;font-size:.95rem}
 footer a{color:var(--neboa)}
+.pe-tremen{margin-top:16px;padding-top:14px;border-top:1px solid rgba(243,241,234,.2);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tremen{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:600;letter-spacing:-.02em}
+.tremen:hover{text-decoration:underline}
+.tremen .dev{color:var(--liquen)}
 form label{display:block;font-weight:600;margin-top:14px}
 form input,form textarea,form select{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--borde);border-radius:8px;background:var(--branco)}
 form .caixa{display:flex;gap:10px;align-items:flex-start;font-weight:400}
