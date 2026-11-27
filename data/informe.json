@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-27T00:24:35+00:00",
+  "data": "2026-11-27T00:33:17+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -41,16 +41,8 @@
       "ok": true
     }
   ],
-  "xeradas": [
-    "carballo-de-luxis",
-    "sobreira-de-siador",
-    "sobreira-do-pazo-de-valinas"
-  ],
-  "publicadas": [
-    "carballo-de-luxis",
-    "sobreira-de-siador",
-    "sobreira-do-pazo-de-valinas"
-  ],
+  "xeradas": [],
+  "publicadas": [],
   "retidas": [],
   "erros": [],
   "sitio": {
