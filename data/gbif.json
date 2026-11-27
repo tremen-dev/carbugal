@@ -1,6 +1,6 @@
 {
-  "actualizado": "2026-11-23",
-  "total": 499,
+  "actualizado": "2026-11-27",
+  "total": 500,
   "especies": [
     {
       "especie": "Quercus pyrenaica",
@@ -8,7 +8,7 @@
     },
     {
       "especie": "Quercus robur",
-      "rexistros": 114
+      "rexistros": 115
     },
     {
       "especie": "Quercus suber",

@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-23T15:35:49+00:00",
+  "data": "2026-11-27T00:05:37+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -32,7 +32,7 @@
     },
     {
       "fonte": "gbif",
-      "total": 499,
+      "total": 500,
       "ok": true
     },
     {
@@ -44,9 +44,7 @@
   "xeradas": [],
   "publicadas": [],
   "retidas": [],
-  "erros": [
-    "falta o segredo DEEPSEEK_API_KEY: esta semana non se redactan textos"
-  ],
+  "erros": [],
   "sitio": {
     "paxinas": 0,
     "no_mapa": 38
