@@ -86,7 +86,8 @@ def avalia(a: dict, outras: list[dict]) -> dict:
         motivos.append(f"números sen soporte nos datos: {', '.join(sen_soporte)}")
     if CASTELAN.search(plano):
         motivos.append("posible castelán mesturado no texto")
-    erros = erros_languagetool(plano, especie=a.get("especie"))
+    texto_lt = plano.replace(a["especie"], "carballo") if a.get("especie") else plano
+    erros = erros_languagetool(texto_lt)
     if len(erros) > 2:  # os topónimos dan algún falso positivo: tolérase ata 2
         motivos.append(f"{len(erros)} erros de lingua segundo LanguageTool")
     for o in outras:
@@ -106,11 +107,9 @@ def avalia(a: dict, outras: list[dict]) -> dict:
 _FONTES_PROPIAS = {"openstreetmap", "inaturalist", "wikidata", "wikimedia", "gbif"}
 
 
-def erros_languagetool(texto: str, especie: str | None = None) -> list[str]:
+def erros_languagetool(texto: str) -> list[str]:
     """Revisión ortográfica e gramatical en galego coa API pública de LanguageTool.
     Se a API non responde, devolve [] e o ciclo segue (queda o filtro de castelán)."""
-    if especie:
-        texto = texto.replace(especie, "carballo")
     try:
         import urllib.parse
         r = http_json("https://api.languagetool.org/v2/check",
