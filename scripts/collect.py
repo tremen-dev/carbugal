@@ -52,9 +52,9 @@ def importa_xunta() -> dict:
             for campo in ("especie", "lugar", "concello", "provincia"):
                 if fila.get(campo):
                     a[campo] = fila[campo].strip()
-            for campo in ("lat", "lon"):
-                if fila.get(campo):
-                    a[campo] = float(fila[campo])
+            if fila.get("lat") and fila.get("lon"):
+                a["lat"], a["lon"] = float(fila["lat"]), float(fila["lon"])
+                a["coords_aproximadas"] = False
             for medida in ("perimetro_m", "altura_m"):
                 if fila.get(medida):
                     a["medidas"][medida] = {"valor": float(fila[medida]),
@@ -134,6 +134,21 @@ def descubre_wikidata() -> dict:
 
 # ---------------------------------------------------------------- Xeocodificación
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
+_STOP_TOPONIMO = {"a", "o", "as", "os", "de", "do", "da", "dos", "das"}
+
+
+def _tokens_toponimo(texto: str) -> list[str]:
+    return [t for t in slugify(texto).split("-") if t and t not in _STOP_TOPONIMO]
+
+
+def _coincide_concello(enderezo: dict, concello: str) -> bool:
+    obx = _tokens_toponimo(concello)
+    if not obx:
+        return True
+    if enderezo.get("municipality"):
+        return _tokens_toponimo(enderezo["municipality"]) == obx
+    return any(enderezo.get(k) and _tokens_toponimo(enderezo[k]) == obx
+               for k in ("city", "town", "village"))
 
 
 def xeocodifica() -> dict:
@@ -148,9 +163,17 @@ def xeocodifica() -> dict:
                 f"{a['lugar']}, {a['concello']}, Galicia" if a.get("lugar") else None,
                 f"{a['concello']}, {a.get('provincia') or ''}, Galicia"]):
             time.sleep(1.1)  # política de uso de Nominatim: 1 petición por segundo
-            res = http_json(NOMINATIM, {"q": consulta, "format": "json", "limit": 1, "countrycodes": "es"})
-            if res and en_galicia(float(res[0]["lat"]), float(res[0]["lon"])):
-                a["lat"], a["lon"] = float(res[0]["lat"]), float(res[0]["lon"])
+            res = http_json(NOMINATIM, {
+                "q": consulta, "format": "json", "addressdetails": 1, "limit": 5, "countrycodes": "es",
+            })
+            match = next(
+                (r for r in (res or [])
+                 if en_galicia(float(r["lat"]), float(r["lon"]))
+                 and _coincide_concello(r.get("address") or {}, a["concello"])),
+                None,
+            )
+            if match:
+                a["lat"], a["lon"] = float(match["lat"]), float(match["lon"])
                 a["coords_aproximadas"] = True
                 engade_fonte(a, "OpenStreetMap (Nominatim), localización aproximada",
                              "https://www.openstreetmap.org/copyright")
@@ -284,6 +307,7 @@ def observacions_inat() -> dict:
                 "taxon_name": "Quercus", "lat": a["lat"], "lng": a["lon"], "radius": 0.1,
                 "quality_grade": "research", "per_page": 1})
             a["proposta"]["verificada"] = preto.get("total_results", 0) > 0
+        a["fontes"] = [f for f in a.get("fontes", []) if f.get("nome") != "iNaturalist"]
         engade_fonte(a, "iNaturalist", f"https://www.inaturalist.org/observations?taxon_name=Quercus"
                                        f"&lat={a['lat']}&lng={a['lon']}&radius={radio}")
         garda_arbore(a)

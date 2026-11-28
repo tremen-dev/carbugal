@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-17",
+  "actualizado": "2026-11-28",
   "catalogo_xunta": {
     "codigo": "90A",
     "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
@@ -22,13 +22,13 @@
     },
     {
       "nome": "iNaturalist",
-      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.3250997&lng=-8.795752&radius=1"
+      "url": "https://www.inaturalist.org/observations?taxon_name=Quercus&lat=42.7717562&lng=-8.4246949&radius=1"
     }
   ],
   "fotos": [],
-  "lat": 42.3250997,
-  "lon": -8.795752,
-  "lugar": "Pazo de Santa Cruz",
+  "lat": 42.7717562,
+  "lon": -8.4246949,
+  "lugar": "Pazo de Santa Cruz de Ribadulla",
   "medidas": {},
   "nome": "Carballo fastixiado do Pazo de Santa Cruz",
   "observacions": {

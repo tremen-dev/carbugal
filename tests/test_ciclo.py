@@ -179,6 +179,70 @@ class Probas(unittest.TestCase):
             common.ARBORES, build.SITE_OUT, build.le_arbores = orixinal
             shutil.rmtree(tmp)
 
+    def test_coincide_concello(self):
+        import collect
+        self.assertFalse(collect._coincide_concello({"municipality": "Bueu", "province": "Pontevedra"}, "Vedra"))
+        self.assertTrue(collect._coincide_concello({"municipality": "Vedra", "state_district": "A Coruña"}, "Vedra"))
+        self.assertFalse(collect._coincide_concello(
+            {"locality": "A Porqueira", "municipality": "Vilamartín de Valdeorras"}, "A Porqueira"
+        ))
+        self.assertFalse(collect._coincide_concello(
+            {"village": "A Porqueira", "municipality": "Vilamartín de Valdeorras"}, "A Porqueira"
+        ))
+        self.assertTrue(collect._coincide_concello({"municipality": "Porqueira"}, "A Porqueira"))
+        self.assertTrue(collect._coincide_concello({"municipality": "A Pobra do Brollón"}, "A Pobra de Brollón"))
+
+    def test_xeocodifica_rexeita_outro_concello(self):
+        import time
+        import collect
+
+        arbore = common.nova_arbore(
+            "Carballo fastixiado do Pazo de Santa Cruz",
+            orixe="xunta",
+            lugar="Pazo de Santa Cruz",
+            concello="Vedra",
+            provincia="A Coruña",
+        )
+        consultas = []
+        gardadas = []
+
+        def fake_http_json(url, params=None, **kw):
+            consultas.append(params["q"])
+            if len(consultas) == 1:
+                return [{
+                    "lat": "42.3250997",
+                    "lon": "-8.795752",
+                    "address": {"municipality": "Bueu", "province": "Pontevedra"},
+                }]
+            return [{
+                "lat": "42.7858183",
+                "lon": "-8.4277546",
+                "address": {"municipality": "Vedra", "state_district": "A Coruña"},
+            }]
+
+        orig_http = collect.http_json
+        orig_le = collect.le_arbores
+        orig_garda = collect.garda_arbore
+        orig_sleep = time.sleep
+        try:
+            collect.http_json = fake_http_json
+            collect.le_arbores = lambda: [arbore]
+            collect.garda_arbore = gardadas.append
+            time.sleep = lambda _: None
+            res = collect.xeocodifica()
+        finally:
+            collect.http_json = orig_http
+            collect.le_arbores = orig_le
+            collect.garda_arbore = orig_garda
+            time.sleep = orig_sleep
+
+        self.assertEqual(res["xeocodificadas"], 1)
+        self.assertEqual(len(consultas), 2)
+        self.assertEqual(len(gardadas), 1)
+        self.assertAlmostEqual(arbore["lat"], 42.7858183)
+        self.assertAlmostEqual(arbore["lon"], -8.4277546)
+        self.assertTrue(arbore["coords_aproximadas"])
+
 
 if __name__ == "__main__":
     unittest.main()
