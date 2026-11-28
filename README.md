@@ -35,6 +35,28 @@ Fontes ──► Recoller ──► Xerar ──► Controis ──► Publicar 
    árbores descóbrense só desde Wikidata e das propostas.
 5. Actions › Ciclo semanal › Run workflow, para a primeira execución.
 
+## Analíticas de visitas
+
+Usamos **Cloudflare Web Analytics**: mide visitas agregadas, sen cookies nin identificar a
+ninguén (por iso non fai falta banner de consentimento; está dito en `/sobre/`).
+
+- **Onde velas:** dash.cloudflare.com › Analytics & Logs › **Web Analytics** › sitio `carbugal.com`
+  (páxinas vistas, visitantes, referrers, países, Core Web Vitals). Non confundir co panel
+  *Analytics › Traffic* do dominio: ese só mide tráfico que pasa polo proxy de Cloudflare e aquí
+  sempre estará a 0.
+- **Como funciona:** un script JS (`beacon.min.js`) inserido en todas as páxinas por
+  `scripts/build.py`. O token está en `config.json` › `cloudflare_analytics_token` (non é un
+  segredo: vai no HTML público). Se o campo está baleo, non se inclúe o script.
+- **DNS:** a zona `carbugal.com` está en Cloudflare (plan Free) cos rexistros de GitHub Pages
+  (4 `A`, 4 `AAAA` en `@` e `CNAME www` → `tremen-dev.github.io`), todos en **DNS only**
+  (nube gris). Non activar o proxy (nube laranxa) sen revisar antes o certificado HTTPS de
+  GitHub Pages. O rexistrador é Dinahosting (só apunta os nameservers a Cloudflare);
+  `carbugal.es` segue en Dinahosting e redirixe con 301.
+- **Límites:** os bloqueadores de publicidade poden impedir o script, así que as cifras son
+  algo inferiores ás reais. Os datos tardan uns minutos en aparecer.
+- **Outras estatísticas:** GitHub Pages non ofrece ningunha. *Insights › Traffic* do repositorio
+  só conta visitas ao repo (14 días), non á web.
+
 ## Probas
 
 ```

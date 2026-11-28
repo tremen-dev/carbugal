@@ -119,6 +119,8 @@ class Probas(unittest.TestCase):
             portada = (tmp / "_site" / "index.html").read_text(encoding="utf-8")
             self.assertIn("<title>Carballos Únicos de Galiza · Catálogo e mapa de árbores senlleiras</title>", portada)
             self.assertNotIn("Inicio ·", portada)
+            self.assertIn('static.cloudflareinsights.com/beacon.min.js', portada)
+            self.assertIn('9aad4fbb897842bbb665913460a5f398', portada)
             self.assertIn('href="https://fonts.gstatic.com" crossorigin', portada)
             self.assertIn('href="/static/favicon-48.png"', portada)
             self.assertIn('href="/static/icona-192.png"', portada)

@@ -12,5 +12,6 @@
   "min_datos_ficha": 6,
   "min_fontes_ficha": 2,
   "min_frases_verificadas": 3,
-  "arredondar_coords_paso": 0.005
+  "arredondar_coords_paso": 0.005,
+  "cloudflare_analytics_token": "9aad4fbb897842bbb665913460a5f398"
 }

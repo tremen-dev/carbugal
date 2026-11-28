@@ -2,12 +2,25 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from html import escape as e
 
 from common import CONFIG, DATA, ROOT, SITE_OUT, hoxe, le_arbores
 
 URL = CONFIG["site_url"].rstrip("/")
+
+
+def _analiticas():
+    """Cloudflare Web Analytics (sen cookies). Só se inclúe se hai token válido en config.json."""
+    token = str(CONFIG.get("cloudflare_analytics_token", "")).strip()
+    if not re.fullmatch(r"[0-9a-f]{32}", token):
+        return ""
+    return ('\n<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
+            f"data-cf-beacon='{{\"token\": \"{token}\"}}'></script>")
+
+
+ANALITICAS = _analiticas()
 MESES = ["xan", "feb", "mar", "abr", "mai", "xuñ", "xul", "ago", "set", "out", "nov", "dec"]
 FONTES_GOOGLE = ("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600"
                  "&family=Source+Sans+3:wght@400;600&display=swap")
@@ -80,7 +93,7 @@ def paxina(titulo: str, corpo: str, descricion: str = "", ruta: str = "/", extra
 <meta name="twitter:title" content="{e(tit)}">
 <meta name="twitter:description" content="{e(desc)}">
 <meta name="twitter:image" content="{e(img_og)}">
-{ld}{extra_head}
+{ld}{extra_head}{ANALITICAS}
 </head>
 <body>
 <header class="cab"><div class="envoltorio">
@@ -541,7 +554,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <p>{e(CONFIG['nome'])} é un proxecto cultural e divulgativo sen ánimo de lucro sobre os carballos senlleiros de Galiza. Non ten publicidade nin vende nada.</p>
 <p>Responsable: {e(CONFIG['responsable'])}. Contacto: {e(CONFIG['contacto'])}.</p>
 <p>Este proxecto non ten relación con ningunha empresa nin marca doutros sectores que poida usar un nome parecido.</p>
-<p>Esta web non usa cookies de seguimento.</p>
+<p>Esta web non usa cookies de seguimento. Para saber cantas persoas a visitan, usa Cloudflare Web Analytics, que mide visitas agregadas sen cookies nin identificar a ninguén.</p>
 """,
         descricion="Sobre Carballos Únicos de Galiza e aviso legal: proxecto cultural e divulgativo sen ánimo de lucro, sen publicidade e sen cookies de seguimento.",
         ruta="/sobre/",
