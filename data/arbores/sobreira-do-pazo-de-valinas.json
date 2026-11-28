@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-27",
+  "actualizado": "2026-11-28",
   "catalogo_xunta": {
     "codigo": "94A",
     "fonte_url": "https://www.xunta.gal/dog/Publicados/2015/20150206/AnuncioCA02-280115-0005_gl.html"
@@ -66,8 +66,8 @@
       "fontes": [
         "Catálogo galego de árbores senlleiras (Xunta de Galicia)",
         "OpenStreetMap (Nominatim), localización aproximada",
-        "iNaturalist",
-        "Wikimedia Commons"
+        "Wikimedia Commons",
+        "iNaturalist"
       ],
       "historia_aportada_pola_comunidade": null,
       "lugar": "Pazo de Valiñas",
@@ -79,53 +79,44 @@
       "provincia": "Pontevedra",
       "ultima_observacion_proxima": null
     },
-    "descartadas": [],
+    "descartadas": [
+      "Polo de agora non hai observacións rexistradas doutros carballos a menos dun quilómetro dela.",
+      "No catálogo consérvase unha fotografía propia desta sobreira."
+    ],
     "frases": [
       {
         "campos": [
           "nome",
-          "especie"
+          "especie",
+          "lugar"
         ],
-        "texto": "A Sobreira do Pazo de Valiñas é un exemplar da especie Quercus suber L."
+        "texto": "A Sobreira do Pazo de Valiñas é un exemplar de Quercus suber L. que medra no lugar do Pazo de Valiñas."
       },
       {
         "campos": [
-          "lugar",
           "concello",
           "provincia"
         ],
-        "texto": "Atópase no Pazo de Valiñas, no concello da Estrada, na provincia de Pontevedra."
+        "texto": "Atópase no concello da Estrada, na provincia de Pontevedra."
       },
       {
         "campos": [
           "no_catalogo_oficial_da_xunta",
           "fontes"
         ],
-        "texto": "Figura no Catálogo galego de árbores senlleiras da Xunta de Galicia."
-      },
-      {
-        "campos": [
-          "numero_de_fotos_propias"
-        ],
-        "texto": "Polo de agora, o catálogo conta cunha única fotografía propia desta árbore."
-      },
-      {
-        "campos": [
-          "observacions_de_carballos_a_menos_de_1_km"
-        ],
-        "texto": "Non hai rexistrada ningunha observación doutros carballos a menos dun quilómetro dela."
+        "texto": "Esta árbore forma parte do Catálogo galego de árbores senlleiras da Xunta de Galicia."
       },
       {
         "campos": [
           "fontes"
         ],
-        "texto": "A súa localización é aproximada e procede de OpenStreetMap a través de Nominatim."
+        "texto": "A información procede do catálogo da Xunta de Galicia, de OpenStreetMap, cunha localización aproximada, de Wikimedia Commons e de iNaturalist."
       }
     ],
     "modelo": "claude-opus-5-5",
-    "pegada": "af158c96c41bbf32",
-    "resumo": "A Sobreira do Pazo de Valiñas, un Quercus suber da Estrada (Pontevedra), forma parte do catálogo oficial de árbores senlleiras da Xunta.",
-    "xerado": "2026-11-27T00:25:49+00:00"
+    "pegada": "f44fd58d6eaa277c",
+    "resumo": "A Sobreira do Pazo de Valiñas é unha árbore da especie Quercus suber L. situada na Estrada, en Pontevedra, e recollida no catálogo oficial da Xunta.",
+    "xerado": "2026-11-28T00:46:41+00:00"
   },
   "wikidata": null
 }
