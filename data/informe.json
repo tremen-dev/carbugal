@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-27T23:54:08+00:00",
+  "data": "2026-11-28T00:13:31+00:00",
   "fontes": [
     {
       "fonte": "xunta",
@@ -41,7 +41,12 @@
       "ok": true
     }
   ],
-  "xeradas": [],
+  "xeradas": [
+    "acineira-de-covas",
+    "carballo-de-luxis",
+    "carballo-de-ramos",
+    "sobreira-da-peneda"
+  ],
   "publicadas": [],
   "retidas": [],
   "erros": [],
